@@ -1,6 +1,6 @@
 package main
 
-import "golangspell.com/golangspell-core/cmd"
+import "github.com/danilovalente/golangspell-core/cmd"
 
 func main() {
 	cmd.Execute()
