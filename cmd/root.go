@@ -59,7 +59,6 @@ func initConfig() {
 			panic(err)
 		}
 
-		// Search config in home directory with name ".cobra" (without extension).
 		viper.AddConfigPath(home)
 		viper.SetConfigName(".golangspell")
 	}

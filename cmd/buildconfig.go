@@ -4,6 +4,7 @@ import (
 	"fmt"
 
 	"encoding/json"
+
 	"github.com/danilovalente/golangspell/domain"
 	"github.com/spf13/cobra"
 )
@@ -16,23 +17,20 @@ func buildSpellConfig() domain.Spell {
 	return domain.Spell{
 		Name: "core",
 		URL:  "https://github.com/danilovalente/golangspell-core",
-		Commands: []domain.Command{
-			domain.Command{
-				Name: "init",
-				Flags: []domain.Flag{
-					domain.Flag{
-						Name:      "module",
-						Shorthand: "m",
-						Value:     "",
-						Usage:     "Module name (required) to initialize with 'Go Modules'. Example: mydomain.com/myapplication",
-					},
-					domain.Flag{
-						Name:      "appname",
-						Shorthand: "n",
-						Value:     "",
-						Usage:     "App name (required) to initialize with 'Go Modules'. Example: myapplication",
-					},
-				},
+		Commands: map[string]Command{
+			"init": Command{
+				Name:             "init",
+				ShortDescription: "The init command creates a new Golang application using the Golangspell base structure",
+				LongDescription: `The init command creates a new Golang application using the Golangspell base structure
+The Architectural Model is based in the Clean Architecture and is the basis to add more resources like domain models and repositories.
+Args:
+module: Module name (required) to initialize with 'Go Modules'. Example: mydomain.com/myapplication"
+appname: App name (required) to initialize with 'Go Modules'. Example: myapplication
+
+Syntax: 
+golangspell init [module] [appname]
+`,
+				ValidArgs: []string{"module", "name"},
 			},
 		},
 	}
