@@ -15,10 +15,10 @@ func init() {
 
 func buildSpellConfig() domain.Spell {
 	return domain.Spell{
-		Name: "core",
+		Name: "golangspell-core",
 		URL:  "https://github.com/danilovalente/golangspell-core",
-		Commands: map[string]Command{
-			"init": Command{
+		Commands: map[string]domain.Command{
+			"init": domain.Command{
 				Name:             "init",
 				ShortDescription: "The init command creates a new Golang application using the Golangspell base structure",
 				LongDescription: `The init command creates a new Golang application using the Golangspell base structure
