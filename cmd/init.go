@@ -7,10 +7,6 @@ import (
 )
 
 func init() {
-	initCmd.Flags().StringVarP(&Module, "module", "m", "", "Module name (required) to initialize with 'Go Modules'. Example: mydomain.com/myapplication")
-	initCmd.MarkFlagRequired("module")
-	initCmd.Flags().StringVarP(&AppName, "appname", "n", "", "App name (required) to initialize with 'Go Modules'. Example: myapplication")
-	initCmd.MarkFlagRequired("appname")
 	rootCmd.AddCommand(initCmd)
 }
 
@@ -27,4 +23,5 @@ var initCmd = &cobra.Command{
 	Run: func(cmd *cobra.Command, args []string) {
 		fmt.Println("Golang Spell v1.0.0 -- HEAD")
 	},
+	ValidArgs: []string{"module", "appname"},
 }

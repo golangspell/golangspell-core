@@ -19,7 +19,7 @@ var (
 	userLicense string
 
 	rootCmd = &cobra.Command{
-		Use:   "gospell-core",
+		Use:   "golangspell-core",
 		Short: "Golang Spell - Core: Plugin with the main Golang Spell commands",
 		Long: `Golang Spell - Core is the main Plugin for the Golang Spell tool. 
 Golang Spell makes it possible to build lightning fast Microservices in Go 
