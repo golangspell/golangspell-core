@@ -22,7 +22,7 @@ func TestContext_Add(t *testing.T) {
 			name:   "Add Component and Delete",
 			fields: fields{components: components},
 			args: args{
-				componentName: Config,
+				componentName: Spell,
 				component:     ComponentInfo{Initializer: func() Component { return ApplicationContext{} }},
 			},
 		},
@@ -35,7 +35,7 @@ func TestContext_Add(t *testing.T) {
 				t.Error("Component not added")
 			}
 			Config :=
-				context.Get(Config)
+				context.Get(Spell)
 			if Config == nil {
 				t.Error("Component not found")
 			}
