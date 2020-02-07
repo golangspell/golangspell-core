@@ -3,6 +3,7 @@ package cmd
 import (
 	"fmt"
 
+	"github.com/danilovalente/golangspell-core/usecase"
 	"github.com/spf13/cobra"
 )
 
@@ -18,4 +19,5 @@ var AppName string
 
 func runInitCommand(cmd *cobra.Command, args []string) {
 	fmt.Printf("Args: %s\n", args)
+	usecase.RenderTemplate("init", nil)
 }
