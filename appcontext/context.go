@@ -2,7 +2,8 @@ package appcontext
 
 //List of consts containing the names of the available componentes in the Application Context - appcontext.Current
 const (
-	Spell = "Spell"
+	Spell    = "Spell"
+	Renderer = "Renderer"
 )
 
 //Component is the Base interface for all Components

@@ -2,6 +2,8 @@ package cmd
 
 import (
 	"fmt"
+	"os"
+	"os/exec"
 
 	"github.com/danilovalente/golangspell-core/usecase"
 	"github.com/spf13/cobra"
@@ -18,6 +20,17 @@ var Module string
 var AppName string
 
 func runInitCommand(cmd *cobra.Command, args []string) {
-	fmt.Printf("Args: %s\n", args)
-	usecase.RenderTemplate("init", nil)
+	err := usecase.RenderInitTemplate(args)
+	if err != nil {
+		fmt.Printf("An error occurred while trying to create the application. Error: %s\n", err.Error())
+		return
+	}
+	execCmd := exec.Command("go", "mod", "init", args[0])
+	execCmd.Stdout = os.Stdout
+	execCmd.Stderr = os.Stderr
+	err = execCmd.Run()
+	if err != nil {
+		fmt.Printf("An error occurred while trying to create the application. Error: %s\n", err.Error())
+	}
+	fmt.Println("Application created!")
 }

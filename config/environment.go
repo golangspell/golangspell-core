@@ -4,7 +4,6 @@ import (
 	"fmt"
 
 	coreconfig "github.com/danilovalente/golangspell/config"
-	"github.com/danilovalente/golangspell/domain"
 	"github.com/spf13/viper"
 )
 
@@ -15,7 +14,7 @@ const (
 
 //Values stores the current configuration values
 var (
-	Values domain.Config
+	Values coreconfig.Config
 )
 
 //ConfigFilePath contains the path of the config file
