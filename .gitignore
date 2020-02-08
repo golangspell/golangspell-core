@@ -17,3 +17,6 @@ golangspell-core
 
 # Temp
 .DS_Store
+
+# Editor
+.vscode/

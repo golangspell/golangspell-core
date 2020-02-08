@@ -12,6 +12,12 @@ import (
 
 //RenderFile renders a file
 func RenderFile(sourcePath string, info os.FileInfo) error {
+	path, err := os.Getwd()
+	if err != nil {
+		log.Println(err)
+	}
+	fmt.Printf("Current Path: %s\n", path)
+
 	fileName := filepath.Base(sourcePath)
 	fmt.Printf("Rendering template: %s\n", fileName)
 
