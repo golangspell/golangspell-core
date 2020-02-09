@@ -3,11 +3,13 @@ package template
 import (
 	"bufio"
 	"fmt"
+	"io"
 	"log"
 	"os"
 	"path/filepath"
 	"strings"
 	"text/template"
+	"time"
 
 	"github.com/danilovalente/golangspell-core/appcontext"
 	"github.com/danilovalente/golangspell-core/config"
@@ -34,15 +36,36 @@ func (renderer *Renderer) mergeVariables(fileName string) map[string]interface{}
 	return allVariables
 }
 
+func (renderer *Renderer) backupExistingCode(sourcePath string) error {
+	source, err := os.Open(sourcePath)
+	if err != nil {
+		return err
+	}
+	defer source.Close()
+	destination, err := os.Create(fmt.Sprintf("%s_backup_%d", sourcePath, time.Now().Unix()))
+	if err != nil {
+		return err
+	}
+	defer destination.Close()
+	_, err = io.Copy(destination, source)
+	return err
+}
+
 //RenderFile renders a template file
 func (renderer *Renderer) RenderFile(sourcePath string, info os.FileInfo) error {
 	fileName := filepath.Base(sourcePath)
 	fmt.Printf("Rendering template: %s\n", fileName)
 	allVariables := renderer.mergeVariables(fileName)
 	destinationPath := strings.ReplaceAll(strings.ReplaceAll(sourcePath, renderer.rootTemplatePath, renderer.currentPath), ".got", ".go")
+	if destFileInfo, err := os.Stat(destinationPath); err == nil && !destFileInfo.IsDir() {
+		err := renderer.backupExistingCode(destinationPath)
+		if err != nil {
+			return err
+		}
+	}
 	file, err := os.Create(destinationPath)
 	if err != nil {
-		log.Println(err)
+		return err
 	}
 	defer file.Close()
 	tmpl, err := template.New(fileName).ParseFiles(sourcePath)
@@ -59,7 +82,10 @@ func (renderer *Renderer) RenderFile(sourcePath string, info os.FileInfo) error 
 }
 
 func (renderer *Renderer) createDirectory(sourcePath string) error {
-	return os.Mkdir(sourcePath, 0700)
+	if _, err := os.Stat(sourcePath); os.IsNotExist(err) {
+		return os.Mkdir(sourcePath, 0700)
+	}
+	return nil
 }
 
 //RenderPath renders an object (file os directory) in the templates directory
