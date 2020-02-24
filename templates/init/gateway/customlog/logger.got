@@ -40,10 +40,6 @@ func Get() Logger {
 
 //initLogger lazily loads a Logger
 func initLogger() appcontext.Component {
-	return Logger{Logger: logger, Sugar: sugar}
-}
-
-func init() {
 	config := zap.Config{
 		Level:       zap.NewAtomicLevelAt(discoverLogLevel()),
 		Development: false,
@@ -59,5 +55,9 @@ func init() {
 
 	logger, _ := config.Build()
 	sugar := logger.Sugar()
+	return Logger{Logger: logger, Sugar: sugar}
+}
+
+func init() {
 	appcontext.Current.Add(appcontext.Logger, initLogger)
 }
