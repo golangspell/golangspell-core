@@ -33,4 +33,13 @@ func runInitCommand(cmd *cobra.Command, args []string) {
 		fmt.Printf("An error occurred while trying to create the application. Error: %s\n", err.Error())
 	}
 	fmt.Println("Application created!")
+	fmt.Println("To run your application, first build it with the command:")
+	fmt.Println("go build")
+	fmt.Println("---------------------------------------------------------")
+	fmt.Println("Then execute the application with the command (Unix based systems):")
+	fmt.Printf("./%s\n", args[1])
+	fmt.Println("Then execute the application with the command (Windows based systems):")
+	fmt.Printf("%s\n", args[1])
+	fmt.Println("---------------------------------------------------------")
+	fmt.Println("Find more details on README.md file")
 }
