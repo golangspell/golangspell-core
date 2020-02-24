@@ -20,6 +20,17 @@ var Module string
 var AppName string
 
 func runInitCommand(cmd *cobra.Command, args []string) {
+	if len(args) != 2 {
+		fmt.Println(`The command init requires exactly two parameters: ModuleName and AppName
+Args:
+ModuleName: New Module's name (required). Example: github.com/your-git-account/my-new-application
+AppName: New App's name (required). Example: my-new-application
+		
+Syntax: 
+golangspell init [ModuleName] [AppName]`)
+		return
+	}
+
 	err := usecase.RenderInitTemplate(args)
 	if err != nil {
 		fmt.Printf("An error occurred while trying to create the application. Error: %s\n", err.Error())
