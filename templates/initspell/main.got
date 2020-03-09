@@ -1,0 +1,11 @@
+package main
+
+import (
+	"{{.ModuleName}}/cmd"
+	_ "{{.ModuleName}}/config"
+	_ "{{.ModuleName}}/gateway/template"
+)
+
+func main() {
+	cmd.Execute()
+}

@@ -41,7 +41,8 @@ golangspell init [ModuleName] [AppName]`)
 	execCmd.Stderr = os.Stderr
 	err = execCmd.Run()
 	if err != nil {
-		fmt.Printf("An error occurred while trying to create the application. Error: %s\n", err.Error())
+		fmt.Printf("An error occurred while trying to init the mudule. Error: %s\n", err.Error())
+		return
 	}
 	fmt.Println("Application created!")
 	fmt.Println("---------------------------------------------------------")

@@ -1,0 +1,32 @@
+package cmd
+
+import (
+	"fmt"
+
+	"{{.ModuleName}}/usecase"
+	"github.com/spf13/cobra"
+)
+
+func init() {
+	RunCommandFunctions["{{.NewSpellName}}-hello"] = runHelloCommand
+}
+
+//Module name to initialize with 'Go Modules'
+var Module string
+
+//AppName used to define the application's directory and the default value to the config variable with the same name
+var AppName string
+
+func runHelloCommand(cmd *cobra.Command, args []string) {
+	if len(args) != 1 {
+		fmt.Println(`The command {{.NewSpellName}}-hello requires exactly one parameter: name
+Args:
+name: Your name (required) to be added to the Hello!. Example: Elvis"
+
+Syntax: 
+golangspell {{.NewSpellName}}-hello [name]`)
+		return
+	}
+
+	usecase.SayHello()
+}
