@@ -50,6 +50,21 @@ golangspell init [module] [appname]
 `,
 				ValidArgs: []string{"module", "name"},
 			},
+			"initspell": &domain.Command{
+				Name:             "initspell",
+				ShortDescription: "The initspell command creates a new Golang Spell using the Golangspell base structure",
+				LongDescription: `The initspell command creates a new Golang Spell using the Golangspell base structure
+A hello example command is included in the new Spell.
+Args:
+module: Module name (required) to initialize with 'Go Modules'. Example: mydomain.com/myapplication"
+newspellname: App name (required) to initialize with 'Go Modules'. Example: my-new-spell
+Use the Spell https://github.com/danilovalente/golangspell-core as a reference for templating
+
+Syntax: 
+golangspell init [module] [newspellname]
+`,
+				ValidArgs: []string{"module", "newspellname"},
+			},
 		},
 	}
 }
