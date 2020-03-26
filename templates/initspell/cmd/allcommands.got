@@ -18,6 +18,7 @@ func GetSpellConfig() appcontext.Component {
 var RunCommandFunctions map[string]domain.RunCommandFunction = make(map[string]domain.RunCommandFunction, 0)
 
 func addInnerCommands() {
+	rootCmd.AddCommand(versionCmd)
 	spell := appcontext.Current.Get(appcontext.Spell).(domain.Spell)
 	for key, command := range spell.Commands {
 		rootCmd.AddCommand(command.CobraCommand(RunCommandFunctions[key]))

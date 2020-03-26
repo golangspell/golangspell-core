@@ -1,0 +1,17 @@
+package cmd
+
+import (
+	"fmt"
+
+	"{{.ModuleName}}/config"
+	"github.com/spf13/cobra"
+)
+
+var versionCmd = &cobra.Command{
+	Use:   "{{.NewSpellName}}-version",
+	Short: "{{.NewSpellName}} version number",
+	Long:  `Shows the {{.NewSpellName}} current installed version`,
+	Run: func(cmd *cobra.Command, args []string) {
+		fmt.Printf("{{.NewSpellName}} v%s -- HEAD\n", config.Version)
+	},
+}
