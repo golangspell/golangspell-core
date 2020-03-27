@@ -61,7 +61,7 @@ newspellname: App name (required) to initialize with 'Go Modules'. Example: my-n
 Use the Spell https://github.com/danilovalente/golangspell-core as a reference for templating
 
 Syntax: 
-golangspell init [module] [newspellname]
+golangspell initspell [module] [newspellname]
 `,
 				ValidArgs: []string{"module", "newspellname"},
 			},
