@@ -4,6 +4,8 @@ import (
 	"{{.ModuleName}}/cmd"
 	_ "{{.ModuleName}}/config"
 	_ "{{.ModuleName}}/gateway/template"
+	_ "{{.ModuleName}}/gateway/customlog"
+
 )
 
 func main() {

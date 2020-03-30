@@ -3,6 +3,7 @@ package main
 import (
 	"{{.ModuleName}}/config"
 	"{{.ModuleName}}/controller"
+	_ "{{.ModuleName}}/gateway/customlog"
 	"github.com/labstack/echo"
 )
 
