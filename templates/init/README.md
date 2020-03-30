@@ -19,7 +19,7 @@ The project is using [Go Modules](https://blog.golang.org/using-go-modules) for 
 Module: {{.ModuleName}}
 
 ## Test and coverage
-TESTRUN=true go test -race ./... -coverprofile=cover.out
+TESTRUN=true go test ./... -coverprofile=cover.out
 
 go tool cover -html=cover.out
 
