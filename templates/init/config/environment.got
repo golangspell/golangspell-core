@@ -17,11 +17,15 @@ type Config struct {
 	LogLevel string
 	//TestRun state if the current execution is a test execution
 	TestRun bool
+	//UsePrometheus to enable prometheus metrics endpoint
+	UsePrometheus bool
 }
 
 func init() {
 	viper.BindEnv("TestRun", "TESTRUN")
 	viper.SetDefault("TestRun", false)
+	viper.BindEnv("UsePrometheus", "USEPROMETHEUS")
+	viper.SetDefault("UsePrometheus", false)
 	viper.BindEnv("Port", "PORT")
 	viper.SetDefault("Port", "8080")
 	viper.BindEnv("AppName", "APP_NAME")
