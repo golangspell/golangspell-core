@@ -6,6 +6,7 @@ import (
 	"io/ioutil"
 	"os"
 	"path/filepath"
+	"regexp"
 	"strings"
 
 	"github.com/danilovalente/golangspell-core/appcontext"
@@ -32,6 +33,8 @@ func renameTemplateFileNames(currentPath string, newSpellCommandName string) err
 
 func addCommandToBuildConfigCommand(currentPath string, args []string) error {
 	filePath := fmt.Sprintf("%s%scmd%sbuildconfig.go", currentPath, toolconfig.PlatformSeparator, toolconfig.PlatformSeparator)
+	renderer := domain.GetRenderer()
+	renderer.BackupExistingCode(filePath)
 	content, err := ioutil.ReadFile(filePath)
 	if err != nil {
 		fmt.Printf("An error occurred while trying to create the new spell command. Error: %s\n", err.Error())
@@ -80,22 +83,39 @@ Examples:
 	return nil
 }
 
+func getModuleName(currentPath string) string {
+	filePath := fmt.Sprintf("%s%sgo.mod", currentPath, toolconfig.PlatformSeparator)
+	content, err := ioutil.ReadFile(filePath)
+	if err != nil {
+		fmt.Printf("An error occurred while trying to create the new spell command. Error: %s\n", err.Error())
+		return ""
+	}
+	contentText := string(content)
+	re := regexp.MustCompile("module (.*?)\n")
+	match := re.FindStringSubmatch(contentText)
+	if len(match) >= 2 {
+		return strings.Trim(match[1], " ")
+	}
+	return ""
+}
+
 //RenderNewSpellCommandTemplate renders the templates defined to the addspellcommand command with the proper variables
 func RenderNewSpellCommandTemplate(args []string) error {
 	spell := appcontext.Current.Get(appcontext.Spell).(tooldomain.Spell)
 	renderer := domain.GetRenderer()
 	newSpellCommandName := args[0]
-	globalVariables := map[string]interface{}{
-		"NewSpellCommandName": newSpellCommandName,
-	}
-
-	err := renderer.RenderTemplate(spell, "addspellcommand", globalVariables, nil)
+	currentPath, err := os.Getwd()
 	if err != nil {
 		fmt.Printf("An error occurred while trying to create the new spell command. Error: %s\n", err.Error())
 		return err
 	}
+	moduleName := getModuleName(currentPath)
+	globalVariables := map[string]interface{}{
+		"NewSpellCommandName": newSpellCommandName,
+		"ModuleName":          moduleName,
+	}
 
-	currentPath, err := os.Getwd()
+	err = renderer.RenderTemplate(spell, "addspellcommand", globalVariables, nil)
 	if err != nil {
 		fmt.Printf("An error occurred while trying to create the new spell command. Error: %s\n", err.Error())
 		return err

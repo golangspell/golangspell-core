@@ -15,6 +15,9 @@ type Renderer interface {
 	//RenderPath renders an object (file os directory) in the templates directory
 	RenderPath(sourcePath string, info os.FileInfo, err error) error
 
+	//BackupExistingCode make a copy of the changed file
+	BackupExistingCode(sourcePath string) error
+
 	//RenderTemplate renders all templates in the template directory providing the respective variables
 	//commandName: specifies the name of the command for which the template will be rendered
 	//globalVariables: defines the list of variables (value) which should be provided for rendering all files
