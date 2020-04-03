@@ -21,4 +21,5 @@ To update the golangspell-core version use the command
 golangspell updatespell github.com/danilovalente/golangspell-core golangspell-core
 
 ## Version history
+* 0.4.1 - Fixed directory and naming issues
 * 0.4.0 - Updated echo to the v4, added Prometheus to init template, created feature addspellcommand
