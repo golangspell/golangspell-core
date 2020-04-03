@@ -5,7 +5,10 @@ Core Plugin with the main Golang Spell commands
 The Core project contains the core commands (and the respective templates) of the platform [Golang Spell](https://github.com/danilovalente/golangspell).
 
 ## Environment
-export GOPRIVATE="github.com/danilovalente/golangspell,github.com/danilovalente/golangspell-core"
+# In order to properly build the project export the current environment variable before building:
+export GO111MODULE=off
+# or on Windows
+set GO111MODULE=off
 
 ![alt text](https://golangspell.com/golangspell/blob/master/img/gopher_spell.png?raw=true)
 
@@ -16,3 +19,6 @@ golangspell addspell github.com/danilovalente/golangspell-core golangspell-core
 ## Update
 To update the golangspell-core version use the command
 golangspell updatespell github.com/danilovalente/golangspell-core golangspell-core
+
+## Version history
+* 0.4.0 - Updated echo to the v4, added Prometheus to init template, created feature addspellcommand
