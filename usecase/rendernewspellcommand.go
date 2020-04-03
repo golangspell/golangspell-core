@@ -26,6 +26,7 @@ func renameTemplateFileNames(currentPath string, newSpellCommandName string) err
 	}
 
 	sourcePath = fmt.Sprintf("%s%susecase%snewspellusecase.go", currentPath, toolconfig.PlatformSeparator, toolconfig.PlatformSeparator)
+	directory = filepath.Dir(sourcePath)
 	destinationPath = fmt.Sprintf("%s%srender%stemplate.go", directory, toolconfig.PlatformSeparator, newSpellCommandName)
 
 	return os.Rename(sourcePath, destinationPath)
@@ -111,7 +112,7 @@ func RenderNewSpellCommandTemplate(args []string) error {
 	}
 	moduleName := getModuleName(currentPath)
 	globalVariables := map[string]interface{}{
-		"NewSpellCommandName": newSpellCommandName,
+		"NewSpellCommandName": strings.ReplaceAll(strings.ReplaceAll(newSpellCommandName, "-", ""), " ", ""),
 		"ModuleName":          moduleName,
 	}
 
