@@ -23,8 +23,6 @@ var ConfigFilePath = fmt.Sprintf("%s/%s", coreconfig.GetGolangspellHome(), confi
 func init() {
 	viper.BindEnv("TestRun", "TESTRUN")
 	viper.SetDefault("TestRun", false)
-	viper.BindEnv("UsePrometheus", "USEPROMETHEUS")
-	viper.SetDefault("UsePrometheus", false)
 	viper.BindEnv("LogLevel", "LOG_LEVEL")
 	viper.SetDefault("LogLevel", "INFO")
 	viper.BindEnv("GoPath", "GOPATH")
