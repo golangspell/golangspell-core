@@ -10,8 +10,6 @@ export GO111MODULE=off
 # or on Windows
 set GO111MODULE=off
 
-![alt text](https://golangspell.com/golangspell/blob/master/img/gopher_spell.png?raw=true)
-
 ## Install
 To install the golangspell-core spell use the command
 
@@ -21,6 +19,8 @@ To install the golangspell-core spell use the command
 To update the golangspell-core version use the command
 
 `golangspell updatespell github.com/danilovalente/golangspell-core golangspell-core`
+
+![Spell Gopher](http://derobgfa8qo3s.cloudfront.net/images/gopher_spell.png)
 
 ## Version history
 * 0.4.2 - Removed unused imports from template
