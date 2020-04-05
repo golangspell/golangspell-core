@@ -14,11 +14,13 @@ set GO111MODULE=off
 
 ## Install
 To install the golangspell-core spell use the command
-golangspell addspell github.com/danilovalente/golangspell-core golangspell-core
+
+`golangspell addspell github.com/danilovalente/golangspell-core golangspell-core`
 
 ## Update
 To update the golangspell-core version use the command
-golangspell updatespell github.com/danilovalente/golangspell-core golangspell-core
+
+`golangspell updatespell github.com/danilovalente/golangspell-core golangspell-core`
 
 ## Version history
 * 0.4.2 - Removed unused imports from template
