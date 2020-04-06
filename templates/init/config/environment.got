@@ -22,15 +22,15 @@ type Config struct {
 }
 
 func init() {
-	viper.BindEnv("TestRun", "TESTRUN")
+	_ = viper.BindEnv("TestRun", "TESTRUN")
 	viper.SetDefault("TestRun", false)
-	viper.BindEnv("UsePrometheus", "USEPROMETHEUS")
+	_ = viper.BindEnv("UsePrometheus", "USEPROMETHEUS")
 	viper.SetDefault("UsePrometheus", false)
-	viper.BindEnv("Port", "PORT")
+	_ = viper.BindEnv("Port", "PORT")
 	viper.SetDefault("Port", "8080")
-	viper.BindEnv("AppName", "APP_NAME")
+	_ = viper.BindEnv("AppName", "APP_NAME")
 	viper.SetDefault("AppName", "{{.AppName}}")
-	viper.BindEnv("LogLevel", "LOG_LEVEL")
+	_ = viper.BindEnv("LogLevel", "LOG_LEVEL")
 	viper.SetDefault("LogLevel", "INFO")
-	viper.Unmarshal(&Values)
+	_ = viper.Unmarshal(&Values)
 }

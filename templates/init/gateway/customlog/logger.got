@@ -89,7 +89,7 @@ func (logger Logger) Fatalf(template string, args ...interface{}) {
 
 //Sync flushes the log if needed
 func (logger Logger) Sync() {
-	logger.Sugar.Sync()
+	_ = logger.Sugar.Sync()
 }
 
 func discoverLogLevel() zapcore.Level {
