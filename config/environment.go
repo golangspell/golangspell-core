@@ -21,11 +21,11 @@ var (
 var ConfigFilePath = fmt.Sprintf("%s/%s", coreconfig.GetGolangspellHome(), configFileName)
 
 func init() {
-	viper.BindEnv("TestRun", "TESTRUN")
+	_ = viper.BindEnv("TestRun", "TESTRUN")
 	viper.SetDefault("TestRun", false)
-	viper.BindEnv("LogLevel", "LOG_LEVEL")
+	_ = viper.BindEnv("LogLevel", "LOG_LEVEL")
 	viper.SetDefault("LogLevel", "INFO")
-	viper.BindEnv("GoPath", "GOPATH")
+	_ = viper.BindEnv("GoPath", "GOPATH")
 	viper.SetDefault("GoPath", fmt.Sprintf("%s/go", coreconfig.GetHomeDir()))
-	viper.Unmarshal(&Values)
+	_ = viper.Unmarshal(&Values)
 }

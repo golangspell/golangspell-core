@@ -35,7 +35,11 @@ func renameTemplateFileNames(currentPath string, newSpellCommandName string) err
 func addCommandToBuildConfigCommand(currentPath string, args []string) error {
 	filePath := fmt.Sprintf("%s%scmd%sbuildconfig.go", currentPath, toolconfig.PlatformSeparator, toolconfig.PlatformSeparator)
 	renderer := domain.GetRenderer()
-	renderer.BackupExistingCode(filePath)
+	err := renderer.BackupExistingCode(filePath)
+	if err != nil {
+		fmt.Printf("An error occurred while trying to create the new spell command. Error: %s\n", err.Error())
+		return err
+	}
 	content, err := ioutil.ReadFile(filePath)
 	if err != nil {
 		fmt.Printf("An error occurred while trying to create the new spell command. Error: %s\n", err.Error())

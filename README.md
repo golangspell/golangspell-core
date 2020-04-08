@@ -23,6 +23,7 @@ To update the golangspell-core version use the command
 ![Spell Gopher](http://derobgfa8qo3s.cloudfront.net/images/gopher_spell.png)
 
 ## Version history
+* 0.4.3 - Included golangci-lint and fixed lint issues
 * 0.4.2 - Removed unused imports from template
 * 0.4.1 - Fixed directory and naming issues
 * 0.4.0 - Updated echo to the v4, added Prometheus to init template, created feature addspellcommand
