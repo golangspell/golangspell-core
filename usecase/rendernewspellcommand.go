@@ -32,19 +32,8 @@ func renameTemplateFileNames(currentPath string, newSpellCommandName string) err
 	return os.Rename(sourcePath, destinationPath)
 }
 
-func addCommandToBuildConfigCommand(currentPath string, args []string) error {
-	filePath := fmt.Sprintf("%s%scmd%sbuildconfig.go", currentPath, toolconfig.PlatformSeparator, toolconfig.PlatformSeparator)
-	renderer := domain.GetRenderer()
-	err := renderer.BackupExistingCode(filePath)
-	if err != nil {
-		fmt.Printf("An error occurred while trying to create the new spell command. Error: %s\n", err.Error())
-		return err
-	}
-	content, err := ioutil.ReadFile(filePath)
-	if err != nil {
-		fmt.Printf("An error occurred while trying to create the new spell command. Error: %s\n", err.Error())
-		return err
-	}
+func addCommandConfig(code string, args []string) string {
+	commandName := args[0]
 	var validArgs string
 	if len(args) > 1 {
 		commandArgs := make([]string, len(args)-1)
@@ -60,25 +49,42 @@ func addCommandToBuildConfigCommand(currentPath string, args []string) error {
 		validArgs = ""
 	}
 
-	code := string(content)
-	code = strings.ReplaceAll(code, ".*},\n.*}\n.*}", fmt.Sprintf(`"%s": &domain.Command{
-		Name:             "%s",
-		ShortDescription: "The %s [PUT HERE THE NEW COMMAND FEATURE]",
-		LongDescription: The %s [PUT HERE THE NEW COMMAND FEATURE EXTENDED DESCRIPTION]
+	r, _ := regexp.Compile("},\n.*}\n.*}")
+
+	code = r.ReplaceAllString(code, fmt.Sprintf(`	"%s": &domain.Command{
+				Name:             "%s",
+				ShortDescription: "The %s [TODO: PUT HERE THE NEW COMMAND FEATURE]",
+				LongDescription: The %s [TODO: PUT HERE THE NEW COMMAND FEATURE EXTENDED DESCRIPTION]
 Args:
-[PUT HERE THE NEW COMMAND ARGS DESCRIPTION]
+[TODO: PUT HERE THE NEW COMMAND ARGS DESCRIPTION]
 
 Syntax: 
-golangspell [PUT HERE THE NEW COMMAND SYNTAX]
+golangspell [TODO: PUT HERE THE NEW COMMAND SYNTAX]
 
 Examples:
-[PUT HERE THE NEW COMMAND EXAMPLES IF NEEDED],
+[TODO: PUT HERE THE NEW COMMAND EXAMPLES IF NEEDED],
 		%s
 	},
 },
 }
-}`, args[0], args[0], args[0], args[0], validArgs))
+}`, commandName, commandName, commandName, commandName, validArgs))
+	return code
+}
 
+func addCommandToBuildConfigCommand(currentPath string, args []string) error {
+	filePath := fmt.Sprintf("%s%scmd%sbuildconfig.go", currentPath, toolconfig.PlatformSeparator, toolconfig.PlatformSeparator)
+	renderer := domain.GetRenderer()
+	err := renderer.BackupExistingCode(filePath)
+	if err != nil {
+		fmt.Printf("An error occurred while trying to create the new spell command. Error: %s\n", err.Error())
+		return err
+	}
+	content, err := ioutil.ReadFile(filePath)
+	if err != nil {
+		fmt.Printf("An error occurred while trying to create the new spell command. Error: %s\n", err.Error())
+		return err
+	}
+	code := addCommandConfig(string(content), args)
 	err = ioutil.WriteFile(filePath, []byte(code), 0644)
 	if err != nil {
 		fmt.Printf("An error occurred while trying to create the new spell command. Error: %s\n", err.Error())
