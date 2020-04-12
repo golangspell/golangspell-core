@@ -5,7 +5,7 @@ Core Plugin with the main Golang Spell commands
 The Core project contains the core commands (and the respective templates) of the platform [Golang Spell](https://github.com/danilovalente/golangspell).
 
 ## Environment
-# In order to properly build the project export the current environment variable before building:
+## In order to properly build the project export the current environment variable before building:
 export GO111MODULE=off
 # or on Windows
 set GO111MODULE=off
