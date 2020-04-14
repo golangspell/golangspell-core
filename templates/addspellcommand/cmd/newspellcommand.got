@@ -8,10 +8,10 @@ import (
 )
 
 func init() {
-	RunCommandFunctions["{{.NewSpellCommandName}}"] = run{{.NewSpellCommandName}}
+	RunCommandFunctions["{{.NewSpellCommandName}}"] = run{{.SafeNewSpellCommandName}}
 }
 
-func run{{.NewSpellCommandName}}(cmd *cobra.Command, args []string) {
+func run{{.SafeNewSpellCommandName}}(cmd *cobra.Command, args []string) {
 	// Example on how to deal when the expected arguments were not provided
 	// if len(args) != 2 {
 	// 	fmt.Println(`The command {{.NewSpellCommandName}} requires n arguments
@@ -27,7 +27,7 @@ func run{{.NewSpellCommandName}}(cmd *cobra.Command, args []string) {
 	// }
 
 	//Here your template, hosted on the folder "templates" is rendered 
-	err := usecase.Render{{.NewSpellCommandName}}Template(args)
+	err := usecase.Render{{.SafeNewSpellCommandName}}Template(args)
 	if err != nil {
 		fmt.Printf("An error occurred while trying to render the template. Error: %s\n", err.Error())
 		return

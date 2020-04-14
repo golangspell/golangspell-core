@@ -33,11 +33,10 @@ func renameTemplateFileNames(currentPath string, newSpellCommandName string) err
 }
 
 func addCommandConfig(code string, args []string) string {
-	commandName := args[0]
 	var validArgs string
 	if len(args) > 1 {
 		commandArgs := make([]string, len(args)-1)
-		for i := 1; i < len(args)-1; i++ {
+		for i := 1; i < len(args); i++ {
 			commandArgs[i-1] = args[i]
 		}
 
@@ -51,23 +50,18 @@ func addCommandConfig(code string, args []string) string {
 
 	r, _ := regexp.Compile("},\n.*}\n.*}")
 
-	code = r.ReplaceAllString(code, fmt.Sprintf(`	"%s": &domain.Command{
-				Name:             "%s",
-				ShortDescription: "The %s [TODO: PUT HERE THE NEW COMMAND FEATURE]",
-				LongDescription: The %s [TODO: PUT HERE THE NEW COMMAND FEATURE EXTENDED DESCRIPTION]
-Args:
-[TODO: PUT HERE THE NEW COMMAND ARGS DESCRIPTION]
+	variables := make(map[string]interface{})
+	variables["CommandName"] = args[0]
+	variables["ValidArgs"] = validArgs
+	renderer := domain.GetRenderer()
+	spell := appcontext.Current.Get(appcontext.Spell).(tooldomain.Spell)
+	renderedTemplateString, err := renderer.RenderString(spell, "addspellcommand", "buildconfig_add.got", variables)
+	if err != nil {
+		fmt.Printf("An error occurred while trying to create the new spell command. Error: %s\n", err.Error())
+		return ""
+	}
 
-Syntax: 
-golangspell [TODO: PUT HERE THE NEW COMMAND SYNTAX]
-
-Examples:
-[TODO: PUT HERE THE NEW COMMAND EXAMPLES IF NEEDED],
-		%s
-	},
-},
-}
-}`, commandName, commandName, commandName, commandName, validArgs))
+	code = r.ReplaceAllString(code, renderedTemplateString)
 	return code
 }
 
@@ -115,6 +109,7 @@ func RenderNewSpellCommandTemplate(args []string) error {
 	spell := appcontext.Current.Get(appcontext.Spell).(tooldomain.Spell)
 	renderer := domain.GetRenderer()
 	newSpellCommandName := args[0]
+	safeNewSpellCommandName := strings.ReplaceAll(strings.ReplaceAll(newSpellCommandName, "-", ""), " ", "")
 	currentPath, err := os.Getwd()
 	if err != nil {
 		fmt.Printf("An error occurred while trying to create the new spell command. Error: %s\n", err.Error())
@@ -122,8 +117,9 @@ func RenderNewSpellCommandTemplate(args []string) error {
 	}
 	moduleName := getModuleName(currentPath)
 	globalVariables := map[string]interface{}{
-		"NewSpellCommandName": strings.ReplaceAll(strings.ReplaceAll(newSpellCommandName, "-", ""), " ", ""),
-		"ModuleName":          moduleName,
+		"NewSpellCommandName":     newSpellCommandName,
+		"SafeNewSpellCommandName": safeNewSpellCommandName,
+		"ModuleName":              moduleName,
 	}
 
 	err = renderer.RenderTemplate(spell, "addspellcommand", globalVariables, nil)

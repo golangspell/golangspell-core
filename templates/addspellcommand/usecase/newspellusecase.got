@@ -6,8 +6,8 @@ import (
 	tooldomain "github.com/danilovalente/golangspell/domain"
 )
 
-//Render{{.NewSpellCommandName}}Template renders the templates defined to the {{.NewSpellCommandName}} command with the proper variables
-func Render{{.NewSpellCommandName}}Template(args []string) error {
+//Render{{.SafeNewSpellCommandName}}Template renders the templates defined to the {{.NewSpellCommandName}} command with the proper variables
+func Render{{.SafeNewSpellCommandName}}Template(args []string) error {
 	spell := appcontext.Current.Get(appcontext.Spell).(tooldomain.Spell)
 	renderer := domain.GetRenderer()
 	globalVariables := map[string]interface{}{

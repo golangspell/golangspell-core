@@ -4,6 +4,7 @@ import (
 	"os"
 
 	"github.com/danilovalente/golangspell-core/appcontext"
+	"github.com/danilovalente/golangspell/domain"
 	tooldomain "github.com/danilovalente/golangspell/domain"
 )
 
@@ -17,6 +18,9 @@ type Renderer interface {
 
 	//BackupExistingCode make a copy of the changed file
 	BackupExistingCode(sourcePath string) error
+
+	//RenderString processing the provided template source file, using the provided variables
+	RenderString(spell domain.Spell, commandName string, stringTemplateFileName string, variables map[string]interface{}) (string, error)
 
 	//RenderTemplate renders all templates in the template directory providing the respective variables
 	//commandName: specifies the name of the command for which the template will be rendered

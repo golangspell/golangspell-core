@@ -1,0 +1,18 @@
+"{{.CommandName}}": &domain.Command{
+	Name:             "{{.CommandName}}",
+	ShortDescription: "The {{.CommandName}} [TODO: PUT HERE THE NEW COMMAND FEATURE]",
+	LongDescription: `The {{.CommandName}} [TODO: PUT HERE THE NEW COMMAND FEATURE EXTENDED DESCRIPTION]
+Args:
+[TODO: PUT HERE THE NEW COMMAND ARGS DESCRIPTION]
+
+Syntax: 
+golangspell [TODO: PUT HERE THE NEW COMMAND SYNTAX]
+
+Examples:
+[TODO: PUT HERE THE NEW COMMAND EXAMPLES IF NEEDED],
+{{.ValidArgs}}
+`
+			},
+		},
+	}
+}
