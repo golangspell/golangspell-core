@@ -43,7 +43,7 @@ func addCommandConfig(code string, args []string) string {
 		argsContent, _ := json.Marshal(commandArgs)
 		argstext := string(argsContent)
 		argstext = strings.ReplaceAll(strings.ReplaceAll(argstext, "[", "{"), "]", "}")
-		validArgs = fmt.Sprintf("ValidArgs: []string%s,", argstext)
+		validArgs = fmt.Sprintf("ValidArgs: []string%s", argstext)
 	} else {
 		validArgs = ""
 	}

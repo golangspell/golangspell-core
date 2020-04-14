@@ -3,6 +3,7 @@ package domain
 import (
 	"os"
 
+	"github.com/danilovalente/golangspell/domain"
 	"{{.ModuleName}}/appcontext"
 	tooldomain "github.com/danilovalente/golangspell/domain"
 )
