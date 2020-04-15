@@ -43,7 +43,7 @@ func addCommandConfig(code string, args []string) string {
 		argsContent, _ := json.Marshal(commandArgs)
 		argstext := string(argsContent)
 		argstext = strings.ReplaceAll(strings.ReplaceAll(argstext, "[", "{"), "]", "}")
-		validArgs = fmt.Sprintf("ValidArgs: []string%s", argstext)
+		validArgs = fmt.Sprintf("ValidArgs: []string%s,", argstext)
 	} else {
 		validArgs = ""
 	}
@@ -88,20 +88,15 @@ func addCommandToBuildConfigCommand(currentPath string, args []string) error {
 	return nil
 }
 
-func getModuleName(currentPath string) string {
-	filePath := fmt.Sprintf("%s%sgo.mod", currentPath, toolconfig.PlatformSeparator)
-	content, err := ioutil.ReadFile(filePath)
-	if err != nil {
-		fmt.Printf("An error occurred while trying to create the new spell command. Error: %s\n", err.Error())
-		return ""
+func createTemplateDirectory(currentPath string, newSpellCommandName string) error {
+	templateDirectory := fmt.Sprintf("%s%stemplates%s%s", currentPath, toolconfig.PlatformSeparator, toolconfig.PlatformSeparator, newSpellCommandName)
+	if _, err := os.Stat(templateDirectory); os.IsNotExist(err) {
+		err = os.MkdirAll(templateDirectory, 0755)
+		if err != nil {
+			return err
+		}
 	}
-	contentText := string(content)
-	re := regexp.MustCompile("module (.*?)\n")
-	match := re.FindStringSubmatch(contentText)
-	if len(match) >= 2 {
-		return strings.Trim(match[1], " ")
-	}
-	return ""
+	return nil
 }
 
 //RenderNewSpellCommandTemplate renders the templates defined to the addspellcommand command with the proper variables
@@ -115,7 +110,7 @@ func RenderNewSpellCommandTemplate(args []string) error {
 		fmt.Printf("An error occurred while trying to create the new spell command. Error: %s\n", err.Error())
 		return err
 	}
-	moduleName := getModuleName(currentPath)
+	moduleName := toolconfig.GetModuleName(currentPath)
 	globalVariables := map[string]interface{}{
 		"NewSpellCommandName":     newSpellCommandName,
 		"SafeNewSpellCommandName": safeNewSpellCommandName,
@@ -135,6 +130,12 @@ func RenderNewSpellCommandTemplate(args []string) error {
 	}
 
 	err = addCommandToBuildConfigCommand(currentPath, args)
+	if err != nil {
+		fmt.Printf("An error occurred while trying to create the new spell command. Error: %s\n", err.Error())
+		return err
+	}
+
+	err = createTemplateDirectory(currentPath, newSpellCommandName)
 	if err != nil {
 		fmt.Printf("An error occurred while trying to create the new spell command. Error: %s\n", err.Error())
 		return err

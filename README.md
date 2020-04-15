@@ -23,6 +23,9 @@ To update the golangspell-core version use the command
 ![Spell Gopher](http://derobgfa8qo3s.cloudfront.net/images/gopher_spell.png)
 
 ## Version history
+* 0.4.8 - Adjusted string template rendering
+* 0.4.7 - Adjusted string templating
+* 0.4.6 - Adjusted string templating feature
 * 0.4.5 - Adjusted initspell command feedback text, added lint and adjusted code
 * 0.4.4 - addspellcommand adjusted to add the new command specification to the Spell's buildconfig command
 * 0.4.3 - Included golangci-lint and fixed lint issues

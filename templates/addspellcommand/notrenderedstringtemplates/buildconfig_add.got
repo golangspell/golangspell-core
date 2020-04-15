@@ -9,8 +9,8 @@ Syntax:
 golangspell [TODO: PUT HERE THE NEW COMMAND SYNTAX]
 
 Examples:
-[TODO: PUT HERE THE NEW COMMAND EXAMPLES IF NEEDED],
-{{.ValidArgs}}`,
+[TODO: PUT HERE THE NEW COMMAND EXAMPLES IF NEEDED]`,
+{{.ValidArgs}}
 			},
 		},
 	}
