@@ -32,6 +32,8 @@ github.com/danilovalente/golangspell v0.3.3 h1:isnJOscLptlaFju7q7/96DhMxug8OrEsk
 github.com/danilovalente/golangspell v0.3.3/go.mod h1:AbMTUFX1eOuQrO9b6dQ7IhiMq8RFnfaf/G1RQteQ8io=
 github.com/danilovalente/golangspell v0.3.5 h1:TFVj7MSXnyB6uuPCVjaJYNvi8bLpg702LMq2OMxfyh4=
 github.com/danilovalente/golangspell v0.3.5/go.mod h1:AbMTUFX1eOuQrO9b6dQ7IhiMq8RFnfaf/G1RQteQ8io=
+github.com/danilovalente/golangspell v0.3.6 h1:rfRzzWcY/pxra8F5cFV7BsWqV0vVzySOg3ANoatjzEE=
+github.com/danilovalente/golangspell v0.3.6/go.mod h1:AbMTUFX1eOuQrO9b6dQ7IhiMq8RFnfaf/G1RQteQ8io=
 github.com/danilovalente/golangspell-core v0.0.0/go.mod h1:pixXI1U/yRfLW6IoDCjs6HQ9Wwv4jlVnhA6nSw3c4h8=
 github.com/danilovalente/golangspell-core v0.0.6/go.mod h1:sbqQvAlZnrChwZGZKk/rQbe+kAnjhpqofIGEWC+6yzE=
 github.com/davecgh/go-spew v1.1.0/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
