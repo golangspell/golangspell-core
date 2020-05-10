@@ -6,8 +6,8 @@ import (
 	"github.com/danilovalente/golangspell/gateway/template"
 )
 
-//getRenderer lazy loads a Renderer
-func getRenderer() appcontext.Component {
+//GetRenderer lazy loads a Renderer
+func GetRenderer() appcontext.Component {
 	return &template.Renderer{}
 }
 
@@ -16,5 +16,5 @@ func init() {
 		return
 	}
 
-	appcontext.Current.Add(appcontext.Renderer, getRenderer)
+	appcontext.Current.Add(appcontext.Renderer, GetRenderer)
 }

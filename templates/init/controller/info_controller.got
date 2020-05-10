@@ -5,7 +5,7 @@ import (
 
 	"{{.ModuleName}}/config"
 	"{{.ModuleName}}/domain"
-	"github.com/labstack/echo"
+	"github.com/labstack/echo/v4"
 )
 
 //GetInfo of the application like version

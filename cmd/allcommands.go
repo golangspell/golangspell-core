@@ -15,7 +15,7 @@ func GetSpellConfig() appcontext.Component {
 }
 
 //RunCommandFunctions stores the available RunCommandFunctions in the Spell, to correlate with the Spell Commands using the Name as key
-var RunCommandFunctions map[string]domain.RunCommandFunction = make(map[string]domain.RunCommandFunction, 0)
+var RunCommandFunctions map[string]domain.RunCommandFunction = make(map[string]domain.RunCommandFunction)
 
 func addInnerCommands() {
 	rootCmd.AddCommand(versionCmd)

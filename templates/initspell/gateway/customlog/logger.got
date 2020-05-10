@@ -17,79 +17,79 @@ type Logger struct {
 
 // Debug uses fmt.Sprint to construct and log a message.
 func (logger Logger) Debug(args ...interface{}) {
-	logger.Sugar.Debug(args)
+	logger.Sugar.Debug(args...)
 }
 
 // Info uses fmt.Sprint to construct and log a message.
 func (logger Logger) Info(args ...interface{}) {
-	logger.Sugar.Info(args)
+	logger.Sugar.Info(args...)
 }
 
 // Warn uses fmt.Sprint to construct and log a message.
 func (logger Logger) Warn(args ...interface{}) {
-	logger.Sugar.Warn(args)
+	logger.Sugar.Warn(args...)
 }
 
 // Error uses fmt.Sprint to construct and log a message.
 func (logger Logger) Error(args ...interface{}) {
-	logger.Sugar.Error(args)
+	logger.Sugar.Error(args...)
 }
 
 // DPanic uses fmt.Sprint to construct and log a message. In development, the
 // logger then panics. (See DPanicLevel for details.)
 func (logger Logger) DPanic(args ...interface{}) {
-	logger.Sugar.DPanic(args)
+	logger.Sugar.DPanic(args...)
 }
 
 // Panic uses fmt.Sprint to construct and log a message, then panics.
 func (logger Logger) Panic(args ...interface{}) {
-	logger.Sugar.Panic(args)
+	logger.Sugar.Panic(args...)
 }
 
 // Fatal uses fmt.Sprint to construct and log a message, then calls os.Exit.
 func (logger Logger) Fatal(args ...interface{}) {
-	logger.Sugar.Fatal(args)
+	logger.Sugar.Fatal(args...)
 }
 
 // Debugf uses fmt.Sprintf to log a templated message.
 func (logger Logger) Debugf(template string, args ...interface{}) {
-	logger.Sugar.Debugf(template, args)
+	logger.Sugar.Debugf(template, args...)
 }
 
 // Infof uses fmt.Sprintf to log a templated message.
 func (logger Logger) Infof(template string, args ...interface{}) {
-	logger.Sugar.Infof(template, args)
+	logger.Sugar.Infof(template, args...)
 }
 
 // Warnf uses fmt.Sprintf to log a templated message.
 func (logger Logger) Warnf(template string, args ...interface{}) {
-	logger.Sugar.Warnf(template, args)
+	logger.Sugar.Warnf(template, args...)
 }
 
 // Errorf uses fmt.Sprintf to log a templated message.
 func (logger Logger) Errorf(template string, args ...interface{}) {
-	logger.Sugar.Errorf(template, args)
+	logger.Sugar.Errorf(template, args...)
 }
 
 // DPanicf uses fmt.Sprintf to log a templated message. In development, the
 // logger then panics. (See DPanicLevel for details.)
 func (logger Logger) DPanicf(template string, args ...interface{}) {
-	logger.Sugar.DPanicf(template, args)
+	logger.Sugar.DPanicf(template, args...)
 }
 
 // Panicf uses fmt.Sprintf to log a templated message, then panics.
 func (logger Logger) Panicf(template string, args ...interface{}) {
-	logger.Sugar.Panicf(template, args)
+	logger.Sugar.Panicf(template, args...)
 }
 
 // Fatalf uses fmt.Sprintf to log a templated message, then calls os.Exit.
 func (logger Logger) Fatalf(template string, args ...interface{}) {
-	logger.Sugar.Fatalf(template, args)
+	logger.Sugar.Fatalf(template, args...)
 }
 
 //Sync flushes the log if needed
 func (logger Logger) Sync() {
-	logger.Sugar.Sync()
+	_ = logger.Sugar.Sync()
 }
 
 func discoverLogLevel() zapcore.Level {

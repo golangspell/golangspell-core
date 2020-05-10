@@ -65,6 +65,25 @@ golangspell initspell [module] [newspellname]
 `,
 				ValidArgs: []string{"module", "newspellname"},
 			},
+			"addspellcommand": &domain.Command{
+				Name:             "addspellcommand",
+				ShortDescription: "The addspellcommand command creates a new command to the current Golangspell",
+				LongDescription: `The addspellcommand command creates a new command to the current Golangspell
+Args:
+newSpellCommandName: New Spell's Command name (required). Example: my-spell-init
+newCommandArgsNames: List of argument names for the command (separated by space)
+		
+Syntax: 
+golangspell addspellcommand [NewSpellCommandName] [...argNames - optional]
+
+Examples:
+# Create a new Spell Command called my-spell-init (all commands must be preceeded by your spell name in order to avoid command name colision)
+golangspell addspellcommand my-spell-init
+
+# Create a new Spell Command called my-spell-init expecting the arguments author, createrepository and createreadme (all commands must be preceeded by your spell name in order to avoid command name colision)
+golangspell addspellcommand my-spell-init author createrepository createreadme`,
+				ValidArgs: []string{"newSpellCommandName", "newCommandArgsNames"},
+			},
 		},
 	}
 }
