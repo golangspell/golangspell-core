@@ -3,7 +3,7 @@ package usecase
 import (
 	"{{.ModuleName}}/appcontext"
 	"{{.ModuleName}}/domain"
-	tooldomain "github.com/danilovalente/golangspell/domain"
+	tooldomain "github.com/golangspell/golangspell/domain"
 )
 
 //Render{{.SafeNewSpellCommandName}}Template renders the templates defined to the {{.NewSpellCommandName}} command with the proper variables

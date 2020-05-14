@@ -1,9 +1,9 @@
 package template
 
 import (
-	"github.com/danilovalente/golangspell-core/appcontext"
-	"github.com/danilovalente/golangspell-core/config"
-	"github.com/danilovalente/golangspell/gateway/template"
+	"github.com/golangspell/golangspell-core/appcontext"
+	"github.com/golangspell/golangspell-core/config"
+	"github.com/golangspell/golangspell/gateway/template"
 )
 
 //GetRenderer lazy loads a Renderer

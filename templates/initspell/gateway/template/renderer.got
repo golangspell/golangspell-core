@@ -3,7 +3,7 @@ package template
 import (
 	"{{.ModuleName}}/appcontext"
 	"{{.ModuleName}}/config"
-	"github.com/danilovalente/golangspell/gateway/template"
+	"github.com/golangspell/golangspell/gateway/template"
 )
 
 //getRenderer lazy loads a Renderer

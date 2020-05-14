@@ -3,7 +3,7 @@ package cmd
 import (
 	"fmt"
 
-	"github.com/danilovalente/golangspell-core/usecase"
+	"github.com/golangspell/golangspell-core/usecase"
 	"github.com/spf13/cobra"
 )
 

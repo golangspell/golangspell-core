@@ -3,9 +3,9 @@ package main
 import (
 	"fmt"
 
-	"github.com/danilovalente/golangspell-core/cmd"
-	_ "github.com/danilovalente/golangspell-core/config"
-	_ "github.com/danilovalente/golangspell-core/gateway/template"
+	"github.com/golangspell/golangspell-core/cmd"
+	_ "github.com/golangspell/golangspell-core/config"
+	_ "github.com/golangspell/golangspell-core/gateway/template"
 )
 
 func main() {

@@ -9,10 +9,10 @@ import (
 	"regexp"
 	"strings"
 
-	"github.com/danilovalente/golangspell-core/appcontext"
-	"github.com/danilovalente/golangspell-core/domain"
-	toolconfig "github.com/danilovalente/golangspell/config"
-	tooldomain "github.com/danilovalente/golangspell/domain"
+	"github.com/golangspell/golangspell-core/appcontext"
+	"github.com/golangspell/golangspell-core/domain"
+	toolconfig "github.com/golangspell/golangspell/config"
+	tooldomain "github.com/golangspell/golangspell/domain"
 )
 
 func renameTemplateFileNames(currentPath string, newSpellCommandName string) error {

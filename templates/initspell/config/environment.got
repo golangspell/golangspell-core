@@ -3,7 +3,7 @@ package config
 import (
 	"fmt"
 
-	coreconfig "github.com/danilovalente/golangspell/config"
+	coreconfig "github.com/golangspell/golangspell/config"
 	"github.com/spf13/viper"
 )
 

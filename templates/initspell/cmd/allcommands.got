@@ -2,7 +2,7 @@ package cmd
 
 import (
 	"{{.ModuleName}}/appcontext"
-	"github.com/danilovalente/golangspell/domain"
+	"github.com/golangspell/golangspell/domain"
 )
 
 func init() {

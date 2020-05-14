@@ -1,8 +1,8 @@
 package cmd
 
 import (
-	"github.com/danilovalente/golangspell-core/appcontext"
-	"github.com/danilovalente/golangspell/domain"
+	"github.com/golangspell/golangspell-core/appcontext"
+	"github.com/golangspell/golangspell/domain"
 )
 
 func init() {

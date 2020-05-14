@@ -3,9 +3,9 @@ package domain
 import (
 	"os"
 
-	"github.com/danilovalente/golangspell-core/appcontext"
-	"github.com/danilovalente/golangspell/domain"
-	tooldomain "github.com/danilovalente/golangspell/domain"
+	"github.com/golangspell/golangspell-core/appcontext"
+	"github.com/golangspell/golangspell/domain"
+	tooldomain "github.com/golangspell/golangspell/domain"
 )
 
 //Renderer defines the features delivered by the Code Template Renderer

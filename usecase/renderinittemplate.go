@@ -1,9 +1,9 @@
 package usecase
 
 import (
-	"github.com/danilovalente/golangspell-core/appcontext"
-	"github.com/danilovalente/golangspell-core/domain"
-	tooldomain "github.com/danilovalente/golangspell/domain"
+	"github.com/golangspell/golangspell-core/appcontext"
+	"github.com/golangspell/golangspell-core/domain"
+	tooldomain "github.com/golangspell/golangspell/domain"
 )
 
 //RenderInitTemplate renders the templates defined to the init command with the proper variables

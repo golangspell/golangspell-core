@@ -1,7 +1,7 @@
 # {{.AppName}}
 
 ## Golang Spell
-The project was initialized using [Golang Spell](https://github.com/danilovalente/golangspell).
+The project was initialized using [Golang Spell](https://github.com/golangspell/golangspell).
 
 ## Architectural Model
 The Architectural Model adopted to structure the application is based on The Clean Architecture.
