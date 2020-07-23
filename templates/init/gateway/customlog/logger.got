@@ -112,6 +112,10 @@ func discoverLogLevel() zapcore.Level {
 
 //initLogger lazily loads a Logger
 func initLogger() appcontext.Component {
+	encoderCfg := zap.NewProductionEncoderConfig()
+	encoderCfg.TimeKey = "timestamp"
+	encoderCfg.EncodeTime = zapcore.ISO8601TimeEncoder
+
 	config := zap.Config{
 		Level:       zap.NewAtomicLevelAt(discoverLogLevel()),
 		Development: false,
@@ -120,7 +124,7 @@ func initLogger() appcontext.Component {
 			Thereafter: 100,
 		},
 		Encoding:         "json",
-		EncoderConfig:    zap.NewProductionEncoderConfig(),
+		EncoderConfig:    encoderCfg,
 		OutputPaths:      []string{"stderr"},
 		ErrorOutputPaths: []string{"stderr"},
 	}
