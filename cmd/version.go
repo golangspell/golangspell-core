@@ -3,7 +3,7 @@ package cmd
 import (
 	"fmt"
 
-	"github.com/danilovalente/golangspell-core/config"
+	"github.com/golangspell/golangspell-core/config"
 	"github.com/spf13/cobra"
 )
 

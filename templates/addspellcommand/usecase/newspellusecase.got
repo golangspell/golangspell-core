@@ -1,0 +1,19 @@
+package usecase
+
+import (
+	"{{.ModuleName}}/appcontext"
+	"{{.ModuleName}}/domain"
+	tooldomain "github.com/golangspell/golangspell/domain"
+)
+
+//Render{{.SafeNewSpellCommandName}}Template renders the templates defined to the {{.NewSpellCommandName}} command with the proper variables
+func Render{{.SafeNewSpellCommandName}}Template(args []string) error {
+	spell := appcontext.Current.Get(appcontext.Spell).(tooldomain.Spell)
+	renderer := domain.GetRenderer()
+	globalVariables := map[string]interface{}{
+		// "[YOUR_COMMAND_ARG_0]": args[0],
+		// "[YOUR_COMMAND_ARG_1]": args[1],
+	}
+
+	return renderer.RenderTemplate(spell, "{{.NewSpellCommandName}}", globalVariables, nil)
+}

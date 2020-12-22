@@ -5,7 +5,7 @@ import (
 
 	"encoding/json"
 
-	"github.com/danilovalente/golangspell/domain"
+	"github.com/golangspell/golangspell/domain"
 	"github.com/spf13/cobra"
 )
 

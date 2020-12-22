@@ -5,7 +5,7 @@ import (
 
 	"encoding/json"
 
-	"github.com/danilovalente/golangspell/domain"
+	"github.com/golangspell/golangspell/domain"
 	"github.com/spf13/cobra"
 )
 
@@ -24,7 +24,7 @@ func runBuildConfigCommand(cmd *cobra.Command, args []string) {
 func buildSpellConfig() domain.Spell {
 	return domain.Spell{
 		Name: "golangspell-core",
-		URL:  "https://github.com/danilovalente/golangspell-core",
+		URL:  "https://github.com/golangspell/golangspell-core",
 		Commands: map[string]*domain.Command{
 			"build-config": &domain.Command{
 				Name:             "build-config",
@@ -58,12 +58,31 @@ A hello example command is included in the new Spell.
 Args:
 module: Module name (required) to initialize with 'Go Modules'. Example: mydomain.com/myapplication"
 newspellname: App name (required) to initialize with 'Go Modules'. Example: my-new-spell
-Use the Spell https://github.com/danilovalente/golangspell-core as a reference for templating
+Use the Spell https://github.com/golangspell/golangspell-core as a reference for templating
 
 Syntax: 
 golangspell initspell [module] [newspellname]
 `,
 				ValidArgs: []string{"module", "newspellname"},
+			},
+			"addspellcommand": &domain.Command{
+				Name:             "addspellcommand",
+				ShortDescription: "The addspellcommand command creates a new command to the current Golangspell",
+				LongDescription: `The addspellcommand command creates a new command to the current Golangspell
+Args:
+newSpellCommandName: New Spell's Command name (required). Example: my-spell-init
+newCommandArgsNames: List of argument names for the command (separated by space)
+		
+Syntax: 
+golangspell addspellcommand [NewSpellCommandName] [...argNames - optional]
+
+Examples:
+# Create a new Spell Command called my-spell-init (all commands must be preceeded by your spell name in order to avoid command name colision)
+golangspell addspellcommand my-spell-init
+
+# Create a new Spell Command called my-spell-init expecting the arguments author, createrepository and createreadme (all commands must be preceeded by your spell name in order to avoid command name colision)
+golangspell addspellcommand my-spell-init author createrepository createreadme`,
+				ValidArgs: []string{"newSpellCommandName", "newCommandArgsNames"},
 			},
 		},
 	}

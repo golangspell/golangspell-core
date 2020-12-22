@@ -5,7 +5,7 @@ import (
 	"os"
 	"os/exec"
 
-	"github.com/danilovalente/golangspell-core/usecase"
+	"github.com/golangspell/golangspell-core/usecase"
 	"github.com/spf13/cobra"
 )
 
@@ -49,7 +49,7 @@ golangspell initspell [ModuleName] [NewSpellName]`)
 	fmt.Println("git push origin v0.0.1")
 	fmt.Println("---------------------------------------------------------")
 	fmt.Println("How to add your new Spell to Golangspell:")
-	fmt.Printf("golangspell addspell https://%s %s", args[0], args[1])
+	fmt.Printf("golangspell addspell https://%s %s\n", args[0], args[1])
 	fmt.Println("Remark: If your Git repository is private, before adding you need to define the env variable GOPRIVATE=[Your module path]")
 	fmt.Println("---------------------------------------------------------")
 	fmt.Println("How to run your new Spell (you have an example command ready):")

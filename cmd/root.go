@@ -7,7 +7,6 @@ import (
 
 var (
 	// Used for flags.
-	cfgFile     string
 	userLicense string
 
 	rootCmd = &cobra.Command{
@@ -34,8 +33,8 @@ func init() {
 	rootCmd.PersistentFlags().StringP("author", "a", "", "author name for copyright attribution")
 	rootCmd.PersistentFlags().StringVarP(&userLicense, "license", "l", "Apache", "name of license for the project")
 	rootCmd.PersistentFlags().Bool("viper", true, "use Viper for configuration")
-	viper.BindPFlag("author", rootCmd.PersistentFlags().Lookup("author"))
-	viper.BindPFlag("useViper", rootCmd.PersistentFlags().Lookup("viper"))
+	_ = viper.BindPFlag("author", rootCmd.PersistentFlags().Lookup("author"))
+	_ = viper.BindPFlag("useViper", rootCmd.PersistentFlags().Lookup("viper"))
 	viper.SetDefault("license", "Apache")
 }
 
