@@ -7,6 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.5.2] - 2020-12-27
+
+### Added
+- template/init/.github/workflows/test.yml for go test and add badge into README;
+- template/init/.github/workflows/lint.yml to run golangci-lint
+
+### Changed
+- Remove strategy matrix since it use the same pattern as go template and creates an issue inside the template and keep test only using ubuntu-latest.
+
 ## [0.5.1] - 2020-07-23
 
 ### Changed
