@@ -1,5 +1,7 @@
 # {{.AppName}}
 
+![Go Test](https://{{.ModuleName}}/workflows/Go%20Test/badge.svg)
+
 ## Golang Spell
 The project was initialized using [Golang Spell](https://github.com/golangspell/golangspell).
 
