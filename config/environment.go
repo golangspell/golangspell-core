@@ -2,9 +2,9 @@ package config
 
 import (
 	"fmt"
+	"os"
 
 	coreconfig "github.com/golangspell/golangspell/config"
-	"github.com/spf13/viper"
 )
 
 const (
@@ -20,12 +20,16 @@ var (
 //ConfigFilePath contains the path of the config file
 var ConfigFilePath = fmt.Sprintf("%s/%s", coreconfig.GetGolangspellHome(), configFileName)
 
+// GetEnv gets an environment variable content or a default value
+func GetEnv(key, defaultValue string) string {
+	if value, ok := os.LookupEnv(key); ok {
+		return value
+	}
+	return defaultValue
+}
+
 func init() {
-	_ = viper.BindEnv("TestRun", "TESTRUN")
-	viper.SetDefault("TestRun", false)
-	_ = viper.BindEnv("LogLevel", "LOG_LEVEL")
-	viper.SetDefault("LogLevel", "INFO")
-	_ = viper.BindEnv("GoPath", "GOPATH")
-	viper.SetDefault("GoPath", fmt.Sprintf("%s/go", coreconfig.GetHomeDir()))
-	_ = viper.Unmarshal(&Values)
+	Values.TestRun = GetEnv("TESTRUN", "false") == "true"
+	Values.GoPath = GetEnv("GOPATH", fmt.Sprintf("%s%sgo", coreconfig.GetHomeDir(), coreconfig.PlatformSeparator))
+	Values.LogLevel = GetEnv("LOG_LEVEL", "INFO")
 }

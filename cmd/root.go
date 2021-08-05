@@ -2,7 +2,6 @@ package cmd
 
 import (
 	"github.com/spf13/cobra"
-	"github.com/spf13/viper"
 )
 
 var (
@@ -32,12 +31,7 @@ func init() {
 
 	rootCmd.PersistentFlags().StringP("author", "a", "", "author name for copyright attribution")
 	rootCmd.PersistentFlags().StringVarP(&userLicense, "license", "l", "Apache", "name of license for the project")
-	rootCmd.PersistentFlags().Bool("viper", true, "use Viper for configuration")
-	_ = viper.BindPFlag("author", rootCmd.PersistentFlags().Lookup("author"))
-	_ = viper.BindPFlag("useViper", rootCmd.PersistentFlags().Lookup("viper"))
-	viper.SetDefault("license", "Apache")
 }
 
 func initConfig() {
-	viper.AutomaticEnv()
 }

@@ -1,9 +1,5 @@
 package config
 
-import (
-	"github.com/spf13/viper"
-)
-
 //Values stores the current configuration values
 var Values Config
 
@@ -21,16 +17,18 @@ type Config struct {
 	UsePrometheus bool
 }
 
+// GetEnv gets an environment variable content or a default value
+func GetEnv(key, defaultValue string) string {
+	if value, ok := os.LookupEnv(key); ok {
+		return value
+	}
+	return defaultValue
+}
+
 func init() {
-	_ = viper.BindEnv("TestRun", "TESTRUN")
-	viper.SetDefault("TestRun", false)
-	_ = viper.BindEnv("UsePrometheus", "USEPROMETHEUS")
-	viper.SetDefault("UsePrometheus", false)
-	_ = viper.BindEnv("Port", "PORT")
-	viper.SetDefault("Port", "8080")
-	_ = viper.BindEnv("AppName", "APP_NAME")
-	viper.SetDefault("AppName", "{{.AppName}}")
-	_ = viper.BindEnv("LogLevel", "LOG_LEVEL")
-	viper.SetDefault("LogLevel", "INFO")
-	_ = viper.Unmarshal(&Values)
+	Values.TestRun = GetEnv("TESTRUN", "false") == "true"
+	Values.UsePrometheus = GetEnv("USEPROMETHEUS", "false") == "true"
+	Values.Port = GetEnv("PORT", "8080")
+	Values.AppName = GetEnv("APP_NAME", "{{.AppName}}")
+	Values.LogLevel = GetEnv("LOG_LEVEL", "INFO")
 }
