@@ -1,5 +1,9 @@
 package config
 
+import (
+	"os"
+)
+
 //Values stores the current configuration values
 var Values Config
 
