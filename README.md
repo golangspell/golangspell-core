@@ -21,7 +21,9 @@ To update the golangspell-core version use the command
 golangspell updatespell github.com/golangspell/golangspell-core golangspell-core
 ```
 
-![Spell Gopher](http://derobgfa8qo3s.cloudfront.net/images/gopher_spell.png)
+<p align="center">
+    <img src="https://github.com/golangspell/golangspell/blob/master/img/gopher_spell.png" width="350" alt="Golang Spell logo"/>
+</p>
 
 ## CHANGELOG
 [Changelog](CHANGELOG.md)
