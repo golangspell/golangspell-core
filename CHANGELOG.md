@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.5.13] - 2022-07-28
+
+### Changed
+- Adjusted template cmd/buildconfig.got - added Spell version
+
 ## [0.5.12] - 2022-07-27
 
 ### Changed

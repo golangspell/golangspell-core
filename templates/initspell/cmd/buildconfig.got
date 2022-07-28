@@ -4,7 +4,7 @@ import (
 	"fmt"
 
 	"encoding/json"
-
+	"{{.ModuleName}}/config"
 	"github.com/golangspell/golangspell/domain"
 	"github.com/spf13/cobra"
 )
@@ -25,6 +25,7 @@ func buildSpellConfig() domain.Spell {
 	return domain.Spell{
 		Name: "{{.NewSpellName}}",
 		URL:  "{{.ModuleName}}",
+		Version: config.Version,
 		Commands: map[string]*domain.Command{
 			"build-config": &domain.Command{
 				Name:             "build-config",
