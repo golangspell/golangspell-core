@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.5.14] - 2022-07-28
+
+### Changed
+- Adjusted template main.got - added import to golangspell/gateway/filesystem - Config Repository
+
 ## [0.5.13] - 2022-07-28
 
 ### Changed

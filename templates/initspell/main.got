@@ -7,7 +7,7 @@ import (
 	_ "{{.ModuleName}}/config"
 	_ "{{.ModuleName}}/gateway/template"
 	_ "{{.ModuleName}}/gateway/customlog"
-
+	_ "github.com/golangspell/golangspell/gateway/filesystem"
 )
 
 func main() {
