@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.5.15] - 2022-09-16
+
+### Changed
+- Updated the Dockerfile with the newer Alpine releases
+
 ## [0.5.14] - 2022-07-28
 
 ### Changed
