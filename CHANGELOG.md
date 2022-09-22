@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.5.17] - 2022-09-22
+
+### Added
+- Added the CORS headers HeaderAccessControlAllowOrigin and HeaderAccessControlAllowMethods
+
 ## [0.5.16] - 2022-09-16
 
 ### Changed
