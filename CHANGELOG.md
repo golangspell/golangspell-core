@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.6.2] - 2024-06-06
+
+### Changed
+- Fixed import at addusecase command
+
 ## [0.6.1] - 2024-06-06
 
 ### Changed

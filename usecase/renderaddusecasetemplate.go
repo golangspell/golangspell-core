@@ -56,7 +56,12 @@ func RenderaddusecaseTemplate(args []string) error {
 		return err
 	}
 
-	_ = GetAddPackageImportToMain().Execute(moduleName, currentPath, fmt.Sprintf("%s/usecase", moduleName))
+	err = GetAddPackageImportToMain().Execute(moduleName, currentPath, fmt.Sprintf("%s/usecase", moduleName))
+
+	if err != nil {
+		fmt.Printf("An error occurred while trying to save the new import to the main file. Error: %s\n", err.Error())
+		return err
+	}
 
 	err = renameAddusecaseTemplateFileNames(currentPath, camelSafeNewUsecaseName)
 	if err != nil {
