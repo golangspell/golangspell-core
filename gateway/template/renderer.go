@@ -6,7 +6,7 @@ import (
 	"github.com/golangspell/golangspell/gateway/template"
 )
 
-//GetRenderer lazy loads a Renderer
+// GetRenderer lazy loads a Renderer
 func GetRenderer() appcontext.Component {
 	return &template.Renderer{}
 }

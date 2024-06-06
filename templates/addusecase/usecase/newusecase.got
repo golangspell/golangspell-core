@@ -1,0 +1,33 @@
+package usecase
+
+import (
+	"{{.ModuleName}}/appcontext"
+)
+
+// {{.SafeNewUsecaseName}} 
+type {{.SafeNewUsecaseName}} struct {
+}
+
+// Execute the usecase {{.SafeNewUsecaseName}}
+func (u *{{.SafeNewUsecaseName}}) Execute(/*TODO: Add here the required params for the usecase execution*/) {
+	//TODO: Implement here the new usecase logic
+}
+
+func build{{.SafeNewUsecaseName}}() appcontext.Component {
+	{{.SafeNewUsecaseNameLowerCamel}} := &{{.SafeNewUsecaseName}}{
+		//TODO: Inject here the dependencies to other components
+	}
+
+	return {{.SafeNewUsecaseNameLowerCamel}}
+}
+
+func Get{{.SafeNewUsecaseName}}() *{{.SafeNewUsecaseName}} {
+	return appcontext.Current.Get(appcontext.{{.SafeNewUsecaseName}}).(*{{.SafeNewUsecaseName}})
+}
+
+func init() {
+	if config.Values.TestRun {
+		return
+	}
+	appcontext.Current.Add(appcontext.{{.SafeNewUsecaseName}}, build{{.SafeNewUsecaseName}})
+}

@@ -1,0 +1,73 @@
+package rest
+
+import (
+	"crypto/tls"
+	"io"
+	"net/http"
+	"strings"
+	"time"
+
+	"{{.ModuleName}}/appcontext"
+	"{{.ModuleName}}/config"
+	"{{.ModuleName}}/domain"
+)
+
+// RestClient is a wrapper the http.Client
+type RestClient struct {
+	httpClient *http.Client
+}
+
+// DoCall using the HTTP protocol. Returns body string and HTTP Status Code
+func (client *RestClient) DoCall(HTTPMethod string, url string, body string, headers map[string]string) (*domain.HTTPResponse, error) {
+	logger := config.GetLogger
+
+	bodyReader := strings.NewReader(body)
+
+	req, err := http.NewRequest(HTTPMethod, url, bodyReader)
+	if err != nil {
+		logger().Error(err)
+		return nil, err
+	}
+
+	for k, v := range headers {
+		req.Header.Add(k, v)
+	}
+	logger().Debugf("Request: \n HttpMethod %s \n URL %s \n Headers: %s \n Body: %s \n ", HTTPMethod, url, headers, body)
+
+	resp, err := client.httpClient.Do(req)
+	if err != nil {
+		logger().Error(err)
+		return nil, err
+	}
+
+	defer resp.Body.Close()
+	responseBody, _ := io.ReadAll(resp.Body)
+
+	logger().Debugf("Response: %s \n", string(responseBody))
+	httpResponse := new(domain.HTTPResponse)
+	httpResponse.ResponseBody = responseBody
+	httpResponse.ResponseHeader = resp.Header
+	httpResponse.ResponseStatus = resp.StatusCode
+	return httpResponse, nil
+}
+
+func initRestClient() appcontext.Component {
+	// Uncomment this block and adjust it properly if certificates are required by the target servers
+	// cert, err := tls.LoadX509KeyPair("certificate/usercert.pem", "certificate/userkey.pem")
+	// if err != nil {
+	// 	panic("Certficate load error: " + err.Error())
+	// }
+	tr := &http.Transport{
+		TLSClientConfig: &tls.Config{
+			MinVersion: config.Values.MinTLSVersion,
+			// Certificates: []tls.Certificate{cert},
+		},
+	}
+	client := &http.Client{Transport: tr, Timeout: time.Duration(config.Values.RestClientTimeout) * time.Second}
+
+	return &RestClient{httpClient: client}
+}
+
+func init() {
+	appcontext.Current.Add(appcontext.RestClient, initRestClient)
+}

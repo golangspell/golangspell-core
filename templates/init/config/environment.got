@@ -1,24 +1,31 @@
 package config
 
 import (
+	"crypto/tls"
 	"os"
+
+	"github.com/caarlos0/env/v11"
 )
 
-//Values stores the current configuration values
-var Values Config
+// Values stores the current configuration values
+var Values config
 
-//Config contains the application's configuration values. Add here your own variables and bind it on init() function
-type Config struct {
+// config contains the application's configuration values. Add here your own variables and bind it on init() function
+type config struct {
 	//Port contains the port in which the application listens
-	Port string
+	Port string `env:"PORT" envDefault:"8080"`
 	//AppName for displaying in Monitoring
-	AppName string
+	AppName string `env:"APP_NAME" envDefault:"{{.AppName}}"`
 	//LogLevel - DEBUG or INFO or WARNING or ERROR or PANIC or FATAL
-	LogLevel string
+	LogLevel string `env:"LOG_LEVEL" envDefault:"INFO"`
 	//TestRun state if the current execution is a test execution
-	TestRun bool
+	TestRun bool `env:"TESTRUN" envDefault:"false"`
 	//UsePrometheus to enable prometheus metrics endpoint
-	UsePrometheus bool
+	UsePrometheus bool `env:"USEPROMETHEUS" envDefault:"false"`
+	//RestClientTimeout
+	RestClientTimeout int `env:"REST_CLIENT_TIMEOUT" envDefault:"30"`
+	//MinTLSVersion is the minimum TLS version supported by the server.
+	MinTLSVersion uint16
 }
 
 // GetEnv gets an environment variable content or a default value
@@ -30,9 +37,10 @@ func GetEnv(key, defaultValue string) string {
 }
 
 func init() {
-	Values.TestRun = GetEnv("TESTRUN", "false") == "true"
-	Values.UsePrometheus = GetEnv("USEPROMETHEUS", "false") == "true"
-	Values.Port = GetEnv("PORT", "8080")
-	Values.AppName = GetEnv("APP_NAME", "{{.AppName}}")
-	Values.LogLevel = GetEnv("LOG_LEVEL", "INFO")
+	Values = config{}
+	if err := env.Parse(&Values); err != nil {
+		panic(err)
+	}
+
+	Values.MinTLSVersion = tls.VersionTLS12
 }

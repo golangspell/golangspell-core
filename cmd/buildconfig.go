@@ -84,6 +84,21 @@ golangspell addspellcommand my-spell-init
 golangspell addspellcommand my-spell-init author createrepository createreadme`,
 				ValidArgs: []string{"newSpellCommandName", "newCommandArgsNames"},
 			},
+			"addusecase": &domain.Command{
+				Name:             "addusecase",
+				ShortDescription: "The addusecase adds a new usecase to the current Golangspell",
+				LongDescription: `The addusecase adds a new usecase to the current Golangspell
+Args:
+usecaseName: The name of the new usecase. Example: MyNewUsecase
+
+Syntax: 
+golangspell addusecase [UsecaseName]
+
+Examples:
+# Adds a new usecase to the current Golangspell with the name "MyNewUsecase"
+golangspell addusecase MyNewUsecase`,
+				ValidArgs: []string{"usecaseName"},
+			},
 		},
 	}
 }

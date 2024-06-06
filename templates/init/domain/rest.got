@@ -1,0 +1,15 @@
+package domain
+
+import (
+	"{{.ModuleName}}/appcontext"
+)
+
+// RestClient Common interface to communicate via rest
+type RestClient interface {
+	DoCall(HTTPMethod string, url string, body string, headers map[string]string) (*HTTPResponse, error)
+}
+
+// GetRestClient Function which retrieves the current implementation of the RestClient
+func GetRestClient() RestClient {
+	return appcontext.Current.Get(appcontext.RestClient).(RestClient)
+}

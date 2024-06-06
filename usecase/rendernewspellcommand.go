@@ -3,7 +3,6 @@ package usecase
 import (
 	"encoding/json"
 	"fmt"
-	"io/ioutil"
 	"os"
 	"path/filepath"
 	"regexp"
@@ -73,13 +72,13 @@ func addCommandToBuildConfigCommand(currentPath string, args []string) error {
 		fmt.Printf("An error occurred while trying to create the new spell command. Error: %s\n", err.Error())
 		return err
 	}
-	content, err := ioutil.ReadFile(filePath)
+	content, err := os.ReadFile(filePath)
 	if err != nil {
 		fmt.Printf("An error occurred while trying to create the new spell command. Error: %s\n", err.Error())
 		return err
 	}
 	code := addCommandConfig(string(content), args)
-	err = ioutil.WriteFile(filePath, []byte(code), 0644)
+	err = os.WriteFile(filePath, []byte(code), 0644)
 	if err != nil {
 		fmt.Printf("An error occurred while trying to create the new spell command. Error: %s\n", err.Error())
 		return err
@@ -99,7 +98,7 @@ func createTemplateDirectory(currentPath string, newSpellCommandName string) err
 	return nil
 }
 
-//RenderNewSpellCommandTemplate renders the templates defined to the addspellcommand command with the proper variables
+// RenderNewSpellCommandTemplate renders the templates defined to the addspellcommand command with the proper variables
 func RenderNewSpellCommandTemplate(args []string) error {
 	spell := appcontext.Current.Get(appcontext.Spell).(tooldomain.Spell)
 	renderer := domain.GetRenderer()

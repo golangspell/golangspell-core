@@ -1,0 +1,32 @@
+package domain
+
+import (
+	"net/http"
+
+	"{{.ModuleName}}/appcontext"
+)
+
+type ResponseBuilder interface {
+	JSON(w http.ResponseWriter, code int, i interface{}) error
+}
+
+// HTTPResponse represents the http response
+type HTTPResponse struct {
+	ResponseBody   []byte
+	ResponseHeader http.Header
+	ResponseStatus int
+}
+
+func (h *HTTPResponse) Body() []byte {
+	return h.ResponseBody
+}
+func (h *HTTPResponse) Header() http.Header {
+	return h.ResponseHeader
+}
+func (h *HTTPResponse) Status() int {
+	return h.ResponseStatus
+}
+
+func GetResponseBuilder() ResponseBuilder {
+	return appcontext.Current.Get(appcontext.ResponseBuilder).(ResponseBuilder)
+}

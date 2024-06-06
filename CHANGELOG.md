@@ -7,6 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.6.0] - 2024-06-06
+
+### Added
+- addusecase command
+- Code file domains, to provide features for code parsing and editing through syntax tree analysis
+- RestClient added to the init template
+
+### Changed
+- Updated Golang version
+- Updated dependencies
+
 ## [0.5.6] - 2021-08-05
 
 ### Changed

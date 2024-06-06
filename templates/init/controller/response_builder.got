@@ -1,0 +1,47 @@
+package controller
+
+import (
+	"encoding/json"
+	"io"
+	"net/http"
+
+	"{{.ModuleName}}/appcontext"
+	"{{.ModuleName}}/config"
+)
+
+type ResponseBuilder struct {
+}
+
+// JSON sends a JSON response with status code.
+func (rb *ResponseBuilder) JSON(w http.ResponseWriter, code int, i interface{}) error {
+	logger := config.GetLogger
+
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(code)
+
+	serializedInterface, err := json.Marshal(i)
+	if err != nil {
+		logger().Errorf("An error occurred while trying to marshal the HTTP Response Body as JSON. Message: %s", err.Error())
+		return err
+	}
+
+	_, err = io.WriteString(w, string(serializedInterface))
+	if err != nil {
+		logger().Errorf("An error occurred while trying to write the HTTP Response Body as JSON. Message: %s", err.Error())
+		return err
+	}
+
+	return nil
+}
+
+func buildResponseBuilder() appcontext.Component {
+	responseBuilder := &ResponseBuilder{}
+	return responseBuilder
+}
+
+func init() {
+	if config.Values.TestRun {
+		return
+	}
+	appcontext.Current.Add(appcontext.ResponseBuilder, buildResponseBuilder)
+}
