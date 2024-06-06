@@ -18,6 +18,61 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Updated Golang version
 - Updated dependencies
 
+## [0.5.17] - 2022-09-22
+
+### Added
+- Added the CORS headers HeaderAccessControlAllowOrigin and HeaderAccessControlAllowMethods
+
+## [0.5.16] - 2022-09-16
+
+### Changed
+- Fixed version
+
+## [0.5.15] - 2022-09-16
+
+### Changed
+- Updated the Dockerfile with the newer Alpine releases
+
+## [0.5.14] - 2022-07-28
+
+### Changed
+- Adjusted template main.got - added import to golangspell/gateway/filesystem - Config Repository
+
+## [0.5.13] - 2022-07-28
+
+### Changed
+- Adjusted template cmd/buildconfig.got - added Spell version
+
+## [0.5.12] - 2022-07-27
+
+### Changed
+- Fixed bug 
+
+## [0.5.11] - 2022-07-27
+
+### Changed
+- Fixed context bug 
+
+## [0.5.10] - 2022-07-27
+
+### Changed
+- Adjusted template rederer to the new go mod directory structure
+
+## [0.5.9] - 2022-07-26
+
+### Changed
+- Updated logic for handling new directory structure of go mod 
+
+## [0.5.8] - 2021-07-26
+
+### Changed
+- Updated dependencies
+
+## [0.5.7] - 2021-07-26
+
+### Changed
+- Updated dependencies
+
 ## [0.5.6] - 2021-08-05
 
 ### Changed
