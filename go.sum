@@ -2,6 +2,8 @@ github.com/cpuguy83/go-md2man/v2 v2.0.2/go.mod h1:tgQtvFlXSQOSOSIRvRPT7W67SCa46t
 github.com/cpuguy83/go-md2man/v2 v2.0.3/go.mod h1:tgQtvFlXSQOSOSIRvRPT7W67SCa46tRHOmNcaadrF8o=
 github.com/golangspell/golangspell v0.4.7 h1:bHAQrt3xHc6AFL4QjoLgLaemxWZJAKv6yKHEfV99NXc=
 github.com/golangspell/golangspell v0.4.7/go.mod h1:oqTJineJaJRmUzp6wby+OKTF5+EFwWmcbxbey7/E1W4=
+github.com/golangspell/golangspell v0.4.8 h1:oES0FGvmuxBx2tVVw0qZl2IcNqo0Y9j46LxHt/zqay4=
+github.com/golangspell/golangspell v0.4.8/go.mod h1:y89P5Osd576RagEA+wgHpZKenVX4o2qKAksfEfhCJ/8=
 github.com/iancoleman/strcase v0.3.0 h1:nTXanmYxhfFAMjZL34Ov6gkzEsSJZ5DbhxWjvSASxEI=
 github.com/iancoleman/strcase v0.3.0/go.mod h1:iwCmte+B7n89clKwxIoIXy/HfoL7AsD47ZCWhYzw7ho=
 github.com/inconshreveable/mousetrap v1.0.0/go.mod h1:PxqpIevigyE2G7u3NXJIT2ANytuPF1OarO4DADm73n8=
