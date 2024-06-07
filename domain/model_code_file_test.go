@@ -87,16 +87,17 @@ func TestCodeFile_AddImport(t *testing.T) {
 	}
 }
 
-func TestCodeFile_AddStatementToFunction(t *testing.T) {
+func TestCodeFile_AddCallToFunction(t *testing.T) {
 	type fields struct {
 		path       string
 		code       *ast.File
 		testOutput *bytes.Buffer
 	}
 	type args struct {
-		functionName   string
-		newStatement   string
-		matchStatement func(statementCode string) bool
+		functionName          string
+		newStatementCall      string
+		newStatementArguments string
+		matchStatement        func(statementCode string) bool
 	}
 	tests := []struct {
 		name   string
@@ -107,7 +108,7 @@ func TestCodeFile_AddStatementToFunction(t *testing.T) {
 		{
 			name:   "Add new fmt.Printf to code",
 			fields: fields{path: "../appcontext/context.go", code: new(CodeFile).ParseFromPath("../appcontext/context.go").code, testOutput: new(bytes.Buffer)},
-			args: args{functionName: "Add", newStatement: `fmt.Printf("My pretty new statement %s", componentName)`, matchStatement: func(statementCode string) bool {
+			args: args{functionName: "Add", newStatementCall: `fmt.Printf`, newStatementArguments: `"My pretty new statement %s", componentName`, matchStatement: func(statementCode string) bool {
 				return strings.Contains(statementCode, "defer applicationContext.componentMutex.Unlock()")
 			}},
 		},
@@ -123,10 +124,10 @@ func TestCodeFile_AddStatementToFunction(t *testing.T) {
 			if err != nil {
 				t.Errorf("An error occurred while trying to parse the file %s. Message: %s", tt.fields.path, err.Error())
 			}
-			got := codeFile.AddStatementToFunction(tt.args.functionName, tt.args.newStatement, tt.args.matchStatement)
+			got := codeFile.AddCallToFunction(tt.args.functionName, tt.args.newStatementCall, tt.args.newStatementArguments, tt.args.matchStatement)
 			resultFileContents := got.testOutput.String()
-			if !strings.Contains(resultFileContents, tt.args.newStatement) {
-				t.Errorf("New statement not added: %s", tt.args.newStatement)
+			if !strings.Contains(resultFileContents, tt.args.newStatementCall) {
+				t.Errorf("New statement not added: %s", tt.args.newStatementCall)
 			}
 		})
 	}

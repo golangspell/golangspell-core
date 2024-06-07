@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.6.5] - 2024-06-07
+
+### Changed
+- Adjusted AddStatementToFunction behavior and renamed to AddCallToFunction
+
 ## [0.6.4] - 2024-06-07
 
 ### Added

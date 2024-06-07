@@ -169,11 +169,11 @@ func (codeFile *CodeFile) AddConstant(constantName string, constantKind token.To
 	return codeFile
 }
 
-// AddStatementToFunction adds a new statement to the function with the given "functionName", under the statement found by the "matchStatement" parameter
+// AddCallToFunction adds a new call statement (command to call a function with|without parameters) to the function with the given "functionName", under the statement found by the "matchStatement" parameter.
 // If nil is provided as the parameter "matchStatement", the newStatement is added as the last line of the function
-func (codeFile *CodeFile) AddStatementToFunction(functionName string, newStatement string, matchStatement func(statementCode string) bool) *CodeFile {
+func (codeFile *CodeFile) AddCallToFunction(functionName string, newStatementCall string, newStatementArguments string, matchStatement func(statementCode string) bool) *CodeFile {
 	if !CodeFileLoaded(codeFile) {
-		fmt.Printf("Code file not loaded. Impossible to add the statement %s\n", newStatement)
+		fmt.Printf("Code file not loaded. Impossible to add the statement %s\n", newStatementCall)
 		return codeFile
 	}
 
@@ -183,11 +183,12 @@ func (codeFile *CodeFile) AddStatementToFunction(functionName string, newStateme
 		return codeFile
 	}
 
-	newStatement = strings.TrimSpace(newStatement)
-	if newStatement == "" {
-		fmt.Printf("newStatement not provided to be added to the code file %s\n", codeFile.path)
+	newStatementCall = strings.TrimSpace(newStatementCall)
+	if newStatementCall == "" {
+		fmt.Printf("newStatementCall not provided to be added to the code file %s\n", codeFile.path)
 		return codeFile
 	}
+	newStatementArguments = strings.TrimSpace(newStatementArguments)
 
 	// Find the function to be modified
 	var targetFunc *ast.FuncDecl
@@ -224,12 +225,12 @@ func (codeFile *CodeFile) AddStatementToFunction(functionName string, newStateme
 	newStmt := &ast.ExprStmt{
 		X: &ast.CallExpr{
 			Fun: &ast.Ident{
-				Name: "fmt",
+				Name: newStatementCall,
 			},
 			Args: []ast.Expr{
 				&ast.BasicLit{
 					Kind:  token.STRING,
-					Value: newStatement,
+					Value: newStatementArguments,
 				},
 			},
 		},
@@ -254,7 +255,7 @@ func (codeFile *CodeFile) AddStatementToFunction(functionName string, newStateme
 		fmt.Printf("An error occurred while trying to save the code file %s. Message: %s\n", codeFile.path, err.Error())
 		return codeFile
 	}
-	fmt.Printf("Added statement '%s' to code file %s\n", newStatement, codeFile.path)
+	fmt.Printf("Added statement '%s' to code file %s\n", newStatementCall, codeFile.path)
 
 	return codeFile
 }
