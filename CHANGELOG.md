@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.6.4] - 2024-06-07
+
+### Added
+- New feature of the code file management - add attribute to struct
+
 ## [0.6.3] - 2024-06-06
 
 ### Changed

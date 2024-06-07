@@ -3,8 +3,10 @@ package appcontext
 import "sync"
 
 // List of consts containing the names of the available componentes in the Application Context - appcontext.Current
+
 const (
 	AddComponentConstantToContext = "AddComponentConstantToContext"
+	AddEnvironmentVariable        = "AddEnvironmentVariable"
 	AddPackageImportToMain        = "AddPackageImportToMain"
 	Spell                         = "Spell"
 	Renderer                      = "Renderer"

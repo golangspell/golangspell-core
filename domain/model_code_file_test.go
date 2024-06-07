@@ -131,3 +131,56 @@ func TestCodeFile_AddStatementToFunction(t *testing.T) {
 		})
 	}
 }
+
+func TestCodeFile_AddAttributeToStruct(t *testing.T) {
+	type fields struct {
+		path       string
+		code       *ast.File
+		fset       *token.FileSet
+		testOutput *bytes.Buffer
+	}
+	type args struct {
+		structTypeName string
+		attributeName  string
+		attributeType  string
+		attributeValue string
+	}
+	tests := []struct {
+		name   string
+		fields fields
+		args   args
+		want   *CodeFile
+	}{
+		{
+			name:   "Add DBConnectionString attribute",
+			fields: fields{path: "../domain/model_code_file.go", code: new(CodeFile).ParseFromPath("../domain/model_code_file.go").code, testOutput: new(bytes.Buffer)},
+			args:   args{structTypeName: "CodeFile", attributeName: "DBConnectionString", attributeType: "string", attributeValue: "`env:\"DB_CONNECTION_STRING\" envDefault:\"\"`"},
+		},
+		{
+			name:   "Add DBConnectionCertificateFileName attribute",
+			fields: fields{path: "../domain/model_code_file.go", code: new(CodeFile).ParseFromPath("../domain/model_code_file.go").code, testOutput: new(bytes.Buffer)},
+			args:   args{structTypeName: "CodeFile", attributeName: "DBConnectionCertificateFileName", attributeType: "string", attributeValue: "`env:\"DB_CONNECTION_CERTIFICATE_FILE_NAME\" envDefault:\"\"`"},
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			codeFile := &CodeFile{
+				path:       tt.fields.path,
+				code:       tt.fields.code,
+				fset:       tt.fields.fset,
+				testOutput: tt.fields.testOutput,
+			}
+			err := codeFile.Parse()
+			if err != nil {
+				t.Errorf("An error occurred while trying to parse the file %s. Message: %s", tt.fields.path, err.Error())
+			}
+			got := codeFile.AddAttributeToStruct(tt.args.structTypeName, tt.args.attributeName, tt.args.attributeType, tt.args.attributeValue)
+			resultFileContents := got.testOutput.String()
+			if !strings.Contains(resultFileContents, tt.args.attributeName) ||
+				!strings.Contains(resultFileContents, tt.args.attributeType) ||
+				!strings.Contains(resultFileContents, tt.args.attributeValue) {
+				t.Errorf("New attribute not added: %s", tt.args.attributeName)
+			}
+		})
+	}
+}

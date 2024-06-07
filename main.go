@@ -6,6 +6,7 @@ import (
 	"github.com/golangspell/golangspell-core/cmd"
 	_ "github.com/golangspell/golangspell-core/config"
 	_ "github.com/golangspell/golangspell-core/gateway/template"
+	_ "github.com/golangspell/golangspell-core/usecase"
 	_ "github.com/golangspell/golangspell/gateway/filesystem"
 )
 

@@ -176,6 +176,13 @@ func (codeFile *CodeFile) AddStatementToFunction(functionName string, newStateme
 		fmt.Printf("Code file not loaded. Impossible to add the statement %s\n", newStatement)
 		return codeFile
 	}
+
+	functionName = strings.TrimSpace(functionName)
+	if functionName == "" {
+		fmt.Printf("functionName not provided and is required to add a statement to the code file %s\n", codeFile.path)
+		return codeFile
+	}
+
 	newStatement = strings.TrimSpace(newStatement)
 	if newStatement == "" {
 		fmt.Printf("newStatement not provided to be added to the code file %s\n", codeFile.path)
@@ -248,6 +255,82 @@ func (codeFile *CodeFile) AddStatementToFunction(functionName string, newStateme
 		return codeFile
 	}
 	fmt.Printf("Added statement '%s' to code file %s\n", newStatement, codeFile.path)
+
+	return codeFile
+}
+
+// AddAttributeToStruct adds a new attribute to an existing struct with the given name (e.g. "NewField"), type (e.g. "string") and value (e.g. "`json:\"new_field\"`")
+func (codeFile *CodeFile) AddAttributeToStruct(structTypeName string, attributeName string, attributeType string, attributeValue string) *CodeFile {
+	if !CodeFileLoaded(codeFile) {
+		fmt.Printf("Code file not loaded. Impossible to add the attribute %s\n", attributeName)
+		return codeFile
+	}
+	structTypeName = strings.TrimSpace(structTypeName)
+	if structTypeName == "" {
+		fmt.Printf("structTypeName not provided and is required to add new attributes to the code file %s\n", codeFile.path)
+		return codeFile
+	}
+
+	attributeName = strings.TrimSpace(attributeName)
+	if attributeName == "" {
+		fmt.Printf("attributeName not provided to be added to the code file %s\n", codeFile.path)
+		return codeFile
+	}
+
+	attributeType = strings.TrimSpace(attributeType)
+	if attributeType == "" {
+		fmt.Printf("attributeType not provided to be added to the code file %s\n", codeFile.path)
+		return codeFile
+	}
+
+	attributeValue = strings.TrimSpace(attributeValue)
+
+	// Find the specified struct
+	var targetStruct *ast.StructType
+	for _, decl := range codeFile.code.Decls {
+		if targetStruct != nil {
+			break
+		}
+		if genDecl, ok := decl.(*ast.GenDecl); ok {
+			for _, spec := range genDecl.Specs {
+				if typeSpec, ok := spec.(*ast.TypeSpec); ok {
+					if typeSpec.Name.Name == structTypeName {
+						if structType, ok := typeSpec.Type.(*ast.StructType); ok {
+							targetStruct = structType
+							break
+						}
+					}
+				}
+			}
+		}
+	}
+	if targetStruct == nil {
+		fmt.Printf("struct of the type '%s' not found at the code file %s\n", structTypeName, codeFile.path)
+		return codeFile
+	}
+
+	// Create the new field with JSON name specification
+	newField := &ast.Field{
+		Names: []*ast.Ident{ast.NewIdent(attributeName)},
+		Type:  ast.NewIdent(attributeType),
+	}
+
+	if attributeValue != "" {
+		newField.Tag = &ast.BasicLit{
+			Kind:  token.STRING,
+			Value: attributeValue,
+		}
+	}
+
+	// Add the new field to the "conf" struct
+	targetStruct.Fields.List = append(targetStruct.Fields.List, newField)
+
+	err := codeFile.Save()
+	if err != nil {
+		fmt.Printf("An error occurred while trying to save the code file %s. Message: %s\n", codeFile.path, err.Error())
+		return codeFile
+	}
+	fmt.Printf("Added attribute '%s' to the struct '%s' contained at the code file %s\n", attributeName, structTypeName, codeFile.path)
 
 	return codeFile
 }
