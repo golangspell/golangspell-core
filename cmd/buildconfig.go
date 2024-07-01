@@ -88,8 +88,8 @@ golangspell addspellcommand my-spell-init author createrepository createreadme`,
 			},
 			"addusecase": &domain.Command{
 				Name:             "addusecase",
-				ShortDescription: "The addusecase adds a new usecase to the current Golangspell",
-				LongDescription: `The addusecase adds a new usecase to the current Golangspell
+				ShortDescription: "The addusecase adds a new usecase to the current Golangspell application",
+				LongDescription: `The addusecase adds a new usecase to the current Golangspell application
 Args:
 usecaseName: The name of the new usecase. Example: MyNewUsecase
 
@@ -100,6 +100,22 @@ Examples:
 # Adds a new usecase to the current Golangspell with the name "MyNewUsecase"
 golangspell addusecase MyNewUsecase`,
 				ValidArgs: []string{"usecaseName"},
+			},
+			"addgateway": &domain.Command{
+				Name:             "addgateway",
+				ShortDescription: "The addgateway adds a new gateway to the current Golangspell application",
+				LongDescription: `The addgateway adds a new gateway to the current Golangspell application
+Args:
+gatewayPackage: The name of the package that will contain the new gateway. Example: gateway-package
+gatewayName: The name of the new gateway. Example: MyNewGateway
+
+Syntax: 
+golangspell addgateway [gateway-package] [GatewayName]
+
+Examples:
+# Adds a new gateway with the name "MyNewGateway" to the package "my-db" of the current Golangspell application
+golangspell addgateway my-db MyNewGateway`,
+				ValidArgs: []string{"gatewayName"},
 			},
 		},
 	}

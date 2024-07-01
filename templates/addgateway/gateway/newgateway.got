@@ -1,0 +1,29 @@
+package {{.SafeNewGatewayPackageName}}
+
+import (
+	"{{.ModuleName}}/appcontext"
+	"{{.ModuleName}}/config"
+)
+
+// {{.SafeNewGatewayName}} 
+type {{.SafeNewGatewayName}} struct {
+}
+
+func build{{.SafeNewGatewayName}}() appcontext.Component {
+	{{.SafeNewGatewayNameLowerCamel}} := &{{.SafeNewGatewayName}}{
+		//TODO: Inject here the dependencies to other components
+	}
+
+	return {{.SafeNewGatewayNameLowerCamel}}
+}
+
+func Get{{.SafeNewGatewayName}}() *{{.SafeNewGatewayName}} {
+	return appcontext.Current.Get(appcontext.{{.SafeNewGatewayName}}).(*{{.SafeNewGatewayName}})
+}
+
+func init() {
+	if config.Values.TestRun {
+		return
+	}
+	appcontext.Current.Add(appcontext.{{.SafeNewGatewayName}}, build{{.SafeNewGatewayName}})
+}
