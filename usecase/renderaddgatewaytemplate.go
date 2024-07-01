@@ -63,7 +63,7 @@ func RenderaddgatewayTemplate(args []string) error {
 	moduleName := toolconfig.GetModuleName(currentPath)
 	safeNewGatewayName := strings.ReplaceAll(strings.ReplaceAll(args[1], "-", ""), " ", "")
 	camelSafeNewGatewayName := strcase.ToCamel(safeNewGatewayName)
-	safeNewGatewayPackageName := strcase.ToDelimited(strings.ReplaceAll(strings.ReplaceAll(args[0], "_", "-"), " ", "-"), '-')
+	safeNewGatewayPackageName := strings.ToLower(strings.ReplaceAll(strings.ReplaceAll(strings.ReplaceAll(args[0], "_", ""), " ", ""), "-", ""))
 	globalVariables := map[string]interface{}{
 		"SafeNewGatewayPackageName":    safeNewGatewayPackageName,
 		"SafeNewGatewayName":           camelSafeNewGatewayName,
