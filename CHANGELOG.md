@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.8.1] - 2024-10-26
+
+### Changed
+- Adjusted template with timeout settings
+
 ## [0.8.0] - 2024-10-26
 
 ### Added

@@ -1,6 +1,9 @@
 package main
 
 import (
+	"fmt"
+	"time"
+
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
 	"{{.ModuleName}}/config"
@@ -12,13 +15,13 @@ import (
 func main() {
 	e := echo.New()
 	e.Use(middleware.TimeoutWithConfig(middleware.TimeoutConfig{
-		Skipper:                     middleware.DefaultSkipper,
-		ErrorMessage:                fmt.Sprintf("A request timeout occurred because the maximum request duration of %d seconds was reached.", config.Values.RestListenerTimeout)
-		OnTimeoutRouteErrorHandler:  func(err error, c echo.Context) {
+		Skipper:      middleware.DefaultSkipper,
+		ErrorMessage: fmt.Sprintf("A request timeout occurred because the maximum request duration of %d seconds was reached.", config.Values.RestListenerTimeout),
+		OnTimeoutRouteErrorHandler: func(err error, c echo.Context) {
 			config.GetLogger().Errorf(fmt.Sprintf("A request timeout occurred because the maximum request duration of %d seconds was reached. Path: %s", config.Values.RestListenerTimeout, c.Path()))
 		},
-		Timeout:                     time.Duration(config.Values.RestListenerTimeout) * time.Second,
-	  }))
+		Timeout: time.Duration(config.Values.RestListenerTimeout) * time.Second,
+	}))
 	controller.MapRoutes(e)
 
 	e.Logger.Fatal(e.Start(":" + config.Values.Port))
