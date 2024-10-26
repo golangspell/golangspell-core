@@ -1,12 +1,12 @@
 module github.com/golangspell/golangspell-core
 
-go 1.22.4
+go 1.23.2
 
 require (
 	github.com/golangspell/golangspell v0.4.8
 	github.com/iancoleman/strcase v0.3.0
-	github.com/spf13/cobra v1.8.0
-	golang.org/x/tools v0.22.0
+	github.com/spf13/cobra v1.8.1
+	golang.org/x/tools v0.26.0
 )
 
 require (

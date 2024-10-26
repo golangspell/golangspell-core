@@ -1,4 +1,4 @@
-FROM golang:1.22.4-alpine3.20 AS golang
+FROM golang:1.23.2-alpine3.20 AS golang
 
 ARG LOC=/builds/go/src/{{.ModuleName}}/
 RUN apk add --no-cache git
