@@ -24,6 +24,8 @@ type config struct {
 	UsePrometheus bool `env:"USEPROMETHEUS" envDefault:"false"`
 	//RestClientTimeout
 	RestClientTimeout int `env:"REST_CLIENT_TIMEOUT" envDefault:"30"`
+	//RestListenerTimeout
+	RestListenerTimeout int `env:"REST_LISTENER_TIMEOUT" envDefault:"30"`
 	//MinTLSVersion is the minimum TLS version supported by the server.
 	MinTLSVersion uint16
 }

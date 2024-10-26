@@ -2,8 +2,8 @@ package config
 
 const (
 	major = "0"
-	minor = "7"
-	patch = "1"
+	minor = "8"
+	patch = "0"
 
 	//Version string.
 	Version = major + "." + minor + "." + patch
