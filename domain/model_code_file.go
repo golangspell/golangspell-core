@@ -128,38 +128,53 @@ func (codeFile *CodeFile) AddConstant(constantName string, constantKind token.To
 		fmt.Printf("Constant name not provided to be added to the code file %s\n", codeFile.path)
 		return codeFile
 	}
-	//TODO: Check properly constant value
-	constantValue = strings.TrimSpace(string(constantValue))
+	constantValue = strings.TrimSpace(constantValue)
 	if constantValue == "" {
 		fmt.Printf("Constant value not provided to be added to the code file %s\n", codeFile.path)
 		return codeFile
 	}
 
-	// Create the new constant declaration
-	newConst := &ast.GenDecl{
-		Tok: token.CONST,
-		Specs: []ast.Spec{
-			&ast.ValueSpec{
-				Names: []*ast.Ident{
-					ast.NewIdent(constantName),
-				},
-				Values: []ast.Expr{
-					&ast.BasicLit{
-						Kind:  constantKind,
-						Value: fmt.Sprintf(`"%s"`, constantValue),
-					},
-				},
+	// Find existing const block, if any
+	var existingConst *ast.GenDecl
+	for _, decl := range codeFile.code.Decls {
+		if genDecl, ok := decl.(*ast.GenDecl); ok && genDecl.Tok == token.CONST {
+			existingConst = genDecl
+			break
+		}
+	}
+
+	// Create the new constant specification
+	newConstSpec := &ast.ValueSpec{
+		Names: []*ast.Ident{
+			ast.NewIdent(constantName),
+		},
+		Values: []ast.Expr{
+			&ast.BasicLit{
+				Kind:  constantKind,
+				Value: fmt.Sprintf(`"%s"`, constantValue),
 			},
 		},
 	}
-	insertIndex := codeFile.GetTokenIndexByKind(token.IMPORT)
-	if insertIndex < 0 {
-		insertIndex = codeFile.GetTokenIndexByKind(token.PACKAGE)
-	}
-	insertIndex++
-	// Add the new constant to the file
-	codeFile.code.Decls = append(codeFile.code.Decls[:insertIndex], append([]ast.Decl{newConst}, codeFile.code.Decls[insertIndex:]...)...)
 
+	if existingConst != nil {
+		// Add to the existing const block
+		existingConst.Specs = append(existingConst.Specs, newConstSpec)
+	} else {
+		// Create a new const block
+		newConst := &ast.GenDecl{
+			Tok:   token.CONST,
+			Specs: []ast.Spec{newConstSpec},
+		}
+
+		insertIndex := codeFile.GetTokenIndexByKind(token.IMPORT)
+		if insertIndex < 0 {
+			insertIndex = codeFile.GetTokenIndexByKind(token.PACKAGE)
+		}
+		insertIndex++
+		codeFile.code.Decls = append(codeFile.code.Decls[:insertIndex], append([]ast.Decl{newConst}, codeFile.code.Decls[insertIndex:]...)...)
+	}
+
+	// Save the modified code file
 	err := codeFile.Save()
 	if err != nil {
 		fmt.Printf("An error occurred while trying to save the code file %s. Message: %s\n", codeFile.path, err.Error())
