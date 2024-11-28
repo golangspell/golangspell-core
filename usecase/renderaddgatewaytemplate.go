@@ -64,8 +64,15 @@ func RenderaddgatewayTemplate(args []string) error {
 	safeNewGatewayName := strings.ReplaceAll(strings.ReplaceAll(args[1], "-", ""), " ", "")
 	camelSafeNewGatewayName := strcase.ToCamel(safeNewGatewayName)
 	safeNewGatewayPackageName := strings.ToLower(strings.ReplaceAll(strings.ReplaceAll(strings.ReplaceAll(args[0], "_", ""), " ", ""), "-", ""))
+	var safeNewGatewayPackageNameLastName string
+	if strings.Contains(safeNewGatewayPackageName, "/") {
+		splittedSafeNewGatewayPackageName := strings.Split(safeNewGatewayPackageName, "/")
+		safeNewGatewayPackageNameLastName = splittedSafeNewGatewayPackageName[len(splittedSafeNewGatewayPackageName)-1]
+	} else {
+		safeNewGatewayPackageNameLastName = safeNewGatewayPackageName
+	}
 	globalVariables := map[string]interface{}{
-		"SafeNewGatewayPackageName":    safeNewGatewayPackageName,
+		"SafeNewGatewayPackageName":    safeNewGatewayPackageNameLastName,
 		"SafeNewGatewayName":           camelSafeNewGatewayName,
 		"SafeNewGatewayNameLowerCamel": strcase.ToLowerCamel(safeNewGatewayName),
 		"ModuleName":                   moduleName,

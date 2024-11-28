@@ -1,6 +1,6 @@
 module github.com/golangspell/golangspell-core
 
-go 1.23.2
+go 1.23.3
 
 require (
 	github.com/golangspell/golangspell v0.4.8
