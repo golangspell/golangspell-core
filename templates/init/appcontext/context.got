@@ -9,7 +9,7 @@ const (
 	RestClient      = "RestClient"
 )
 
-type Component interface{} // Component is the Base interface for all Components IMPORTANT: Please keep it as an inline comment to prevent issues in the code generation
+type Component interface{} /* Component is the Base interface for all Components IMPORTANT: Please keep it as an inline comment to prevent issues in the code generation */
 
 // ComponentInitializerFunction specifies a function for lazily initializing a component
 type ComponentInitializerFunction func() Component
