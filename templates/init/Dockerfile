@@ -1,4 +1,4 @@
-FROM golang:1.23.3-alpine3.20 AS golang
+FROM golang:1.25.0-alpine3.22 AS golang
 
 ARG LOC=/builds/go/src/{{.ModuleName}}/
 RUN apk add --no-cache git
@@ -8,7 +8,7 @@ COPY . $LOC
 ENV CGO_ENABLED 0
 RUN cd $LOC && TESTRUN=true go test ./... && go build
 
-FROM alpine:3.20
+FROM alpine:3.22
 ARG LOC=/builds/go/src/{{.ModuleName}}
 WORKDIR /
 VOLUME /tmp

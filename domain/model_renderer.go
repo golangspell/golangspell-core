@@ -5,10 +5,9 @@ import (
 
 	"github.com/golangspell/golangspell-core/appcontext"
 	"github.com/golangspell/golangspell/domain"
-	tooldomain "github.com/golangspell/golangspell/domain"
 )
 
-//Renderer defines the features delivered by the Code Template Renderer
+// Renderer defines the features delivered by the Code Template Renderer
 type Renderer interface {
 	//RenderFile renders a template file
 	RenderFile(sourcePath string, info os.FileInfo) error
@@ -26,10 +25,10 @@ type Renderer interface {
 	//commandName: specifies the name of the command for which the template will be rendered
 	//globalVariables: defines the list of variables (value) which should be provided for rendering all files
 	//specificVariables: defines the list of variables (value) which should be provided for rendering specific file names (key)
-	RenderTemplate(spell tooldomain.Spell, commandName string, globalVariables map[string]interface{}, specificVariables map[string]map[string]interface{}) error
+	RenderTemplate(spell domain.Spell, commandName string, globalVariables map[string]interface{}, specificVariables map[string]map[string]interface{}) error
 }
 
-//GetRenderer returns the current component registered to provide the code rendering features
+// GetRenderer returns the current component registered to provide the code rendering features
 func GetRenderer() Renderer {
 	return appcontext.Current.Get(appcontext.Renderer).(Renderer)
 }

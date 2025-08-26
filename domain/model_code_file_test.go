@@ -78,7 +78,7 @@ func TestCodeFile_AddImport(t *testing.T) {
 			if err != nil {
 				t.Errorf("An error occurred while trying to parse the file %s. Message: %s", tt.fields.path, err.Error())
 			}
-			var got *CodeFile = codeFile.AddImport(tt.args.importPath, tt.args.alias)
+			var got = codeFile.AddImport(tt.args.importPath, tt.args.alias)
 			resultFileContents := got.testOutput.String()
 			if !strings.Contains(resultFileContents, tt.fields.importValue) {
 				t.Errorf("New import not added: %s", tt.fields.importValue)

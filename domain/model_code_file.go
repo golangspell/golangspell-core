@@ -369,7 +369,11 @@ func (codeFile *CodeFile) saveToFile() error {
 	if err != nil {
 		return err
 	}
-	defer file.Close()
+	defer func() {
+		if err := file.Close(); err != nil {
+			fmt.Printf("An error occurred while closing the file %s. Message: %s\n", codeFile.path, err.Error())
+		}
+	}()
 
 	if err := printer.Fprint(file, codeFile.fset, codeFile.code); err != nil {
 		return err

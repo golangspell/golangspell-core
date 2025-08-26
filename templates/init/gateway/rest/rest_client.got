@@ -40,7 +40,11 @@ func (client *RestClient) DoCall(HTTPMethod string, url string, body string, hea
 		return nil, err
 	}
 
-	defer resp.Body.Close()
+	defer func() {
+        if cerr := resp.Body.Close(); cerr != nil {
+            logger().Errorf("Error closing response body: %v", cerr)
+        }
+    }()
 	responseBody, _ := io.ReadAll(resp.Body)
 
 	logger().Debugf("Response: %s \n", string(responseBody))

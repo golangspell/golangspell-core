@@ -2,7 +2,6 @@ package controller
 
 import (
 	"encoding/json"
-	"io"
 	"net/http"
 
 	"{{.ModuleName}}/appcontext"
@@ -25,7 +24,7 @@ func (rb *ResponseBuilder) JSON(w http.ResponseWriter, code int, i interface{}) 
 		return err
 	}
 
-	_, err = io.WriteString(w, string(serializedInterface))
+	_, err = w.Write(serializedInterface)
 	if err != nil {
 		logger().Errorf("An error occurred while trying to write the HTTP Response Body as JSON. Message: %s", err.Error())
 		return err
